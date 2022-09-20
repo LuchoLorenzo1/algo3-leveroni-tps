@@ -100,7 +100,7 @@ tienePuntosDeVida: pVida
 	puntosDeVida = pVida ifTrue: [ ^true] ifFalse: [^false]! !
 
 
-!CombatienteHumanoArthas class methodsFor: '--** private fileout/in **--' stamp: 'alr 9/19/2022 16:51:17'!
+!CombatienteHumanoArthas class methodsFor: '--** private fileout/in **--' stamp: 'LL 9/19/2022 22:55:24'!
 initializeCollaboratorsFromFile
 	"Auto generated method for loading purposes - Do not modify it"
 
@@ -109,9 +109,9 @@ initializeCollaboratorsFromFile
 	estrategia := ((SerializableBlockClosure basicNew instVarAt: 1 put: CombatienteHumanoArthas; instVarAt: 2 put: '[ :argm8_1 |
 	argm8_1 anyOne. ]'; instVarAt: 3 put: #(); yourself) asEvaluable).
 	dañoAAbsorber := (SimpleMeasure basicNew instVarAt: 1 put: 0; instVarAt: 2 put: (BaseUnit basicNew instVarAt: 1 put: 'puntosDeVida'; instVarAt: 2 put: 'puntosDeVidas'; instVarAt: 3 put: 'pv'; yourself); yourself).
-	dañoAInfligir := (SimpleMeasure basicNew instVarAt: 1 put: 2; instVarAt: 2 put: (BaseUnit basicNew instVarAt: 1 put: 'puntosDeVida'; instVarAt: 2 put: 'puntosDeVidas'; instVarAt: 3 put: 'pv'; yourself); yourself).
+	dañoAInfligir := (SimpleMeasure basicNew instVarAt: 1 put: 10; instVarAt: 2 put: (BaseUnit basicNew instVarAt: 1 put: 'puntosDeVida'; instVarAt: 2 put: 'puntosDeVidas'; instVarAt: 3 put: 'pv'; yourself); yourself).
 	puntosDeVida := (SimpleMeasure basicNew instVarAt: 1 put: 20; instVarAt: 2 put: (BaseUnit basicNew instVarAt: 1 put: 'puntosDeVida'; instVarAt: 2 put: 'puntosDeVidas'; instVarAt: 3 put: 'pv'; yourself); yourself).
-	enemigos := ((Array new: 1) at: 1 put: CombatienteOrcoOlgra; yourself).
+	enemigos := #().
 	estaDistraido := false.
 	fueraDeCombate := false.! !
 
@@ -218,7 +218,7 @@ tienePuntosDeVida: pVida
 	puntosDeVida = pVida ifTrue: [ ^true] ifFalse: [^false]! !
 
 
-!CombatienteOrcoMankrik class methodsFor: '--** private fileout/in **--' stamp: 'alr 9/19/2022 16:51:18'!
+!CombatienteOrcoMankrik class methodsFor: '--** private fileout/in **--' stamp: 'LL 9/19/2022 22:55:24'!
 initializeCollaboratorsFromFile
 	"Auto generated method for loading purposes - Do not modify it"
 
@@ -336,7 +336,7 @@ tienePuntosDeVida: pVida
 	puntosDeVida = pVida ifTrue: [ ^true] ifFalse: [^false]! !
 
 
-!CombatienteOrcoOlgra class methodsFor: '--** private fileout/in **--' stamp: 'alr 9/19/2022 16:51:18'!
+!CombatienteOrcoOlgra class methodsFor: '--** private fileout/in **--' stamp: 'LL 9/19/2022 22:55:24'!
 initializeCollaboratorsFromFile
 	"Auto generated method for loading purposes - Do not modify it"
 
@@ -344,12 +344,12 @@ initializeCollaboratorsFromFile
 	argm8_1 anyOne. ]'; instVarAt: 3 put: #(); yourself) asEvaluable).
 	dañoAAbsorber := (SimpleMeasure basicNew instVarAt: 1 put: 0; instVarAt: 2 put: (BaseUnit basicNew instVarAt: 1 put: 'puntosDeVida'; instVarAt: 2 put: 'puntosDeVidas'; instVarAt: 3 put: 'pv'; yourself); yourself).
 	dañoAInfligir := (SimpleMeasure basicNew instVarAt: 1 put: 2; instVarAt: 2 put: (BaseUnit basicNew instVarAt: 1 put: 'puntosDeVida'; instVarAt: 2 put: 'puntosDeVidas'; instVarAt: 3 put: 'pv'; yourself); yourself).
-	puntosDeVida := (SimpleMeasure basicNew instVarAt: 1 put: 20; instVarAt: 2 put: (BaseUnit basicNew instVarAt: 1 put: 'puntosDeVida'; instVarAt: 2 put: 'puntosDeVidas'; instVarAt: 3 put: 'pv'; yourself); yourself).
-	enemigos := ((Array new: 1) at: 1 put: CombatienteHumanoArthas; yourself).
+	puntosDeVida := (SimpleMeasure basicNew instVarAt: 1 put: 0; instVarAt: 2 put: (BaseUnit basicNew instVarAt: 1 put: 'puntosDeVida'; instVarAt: 2 put: 'puntosDeVidas'; instVarAt: 3 put: 'pv'; yourself); yourself).
+	enemigos := #().
 	estaDistraido := false.
 	bonificacionFuerza := (SimpleMeasure basicNew instVarAt: 1 put: 1; instVarAt: 2 put: (BaseUnit basicNew instVarAt: 1 put: 'puntosDeVida'; instVarAt: 2 put: 'puntosDeVidas'; instVarAt: 3 put: 'pv'; yourself); yourself).
 	bonificacionAgilidad := (SimpleMeasure basicNew instVarAt: 1 put: 0; instVarAt: 2 put: (BaseUnit basicNew instVarAt: 1 put: 'puntosDeVida'; instVarAt: 2 put: 'puntosDeVidas'; instVarAt: 3 put: 'pv'; yourself); yourself).
-	fueraDeCombate := false.! !
+	fueraDeCombate := true.! !
 
 
 !classDefinition: #CombatientesTest category: 'AtaquesFantasticosPaso2'!
@@ -858,6 +858,50 @@ test01FocalizarEnElMasHeridoEsMejorQueEnElMasSano
 	Assert isTrue: self puntosDeVidaDelGanadorFocalizandoEnElMasHerido > self puntosDeVidaDelGanadorFocalizandoEnElMasSano.! !
 
 
+!classDefinition: #InformeCombate category: 'AtaquesFantasticosPaso2'!
+DenotativeObject subclass: #InformeCombate
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'AtaquesFantasticosPaso2'!
+
+"-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
+
+!classDefinition: 'InformeCombate class' category: 'AtaquesFantasticosPaso2'!
+InformeCombate class
+	instanceVariableNames: 'rondaAlcanzada ganador'!
+
+!InformeCombate class methodsFor: 'as yet unclassified' stamp: 'LL 9/19/2022 21:45:57'!
+Initialize
+	rondaAlcanzada := 0.
+	ganador := 0.! !
+
+!InformeCombate class methodsFor: 'as yet unclassified' stamp: 'LL 9/19/2022 21:33:48'!
+alcanzadaLaRonda: ronda
+	^(rondaAlcanzada = ronda) ! !
+
+!InformeCombate class methodsFor: 'as yet unclassified' stamp: 'LL 9/19/2022 21:39:35'!
+aumentarRondaAlcanzada.
+	rondaAlcanzada  := rondaAlcanzada + 1.! !
+
+!InformeCombate class methodsFor: 'as yet unclassified' stamp: 'LL 9/19/2022 21:37:01'!
+definirGanador: n.
+	ganador := n.
+	! !
+
+!InformeCombate class methodsFor: 'as yet unclassified' stamp: 'LL 9/19/2022 22:09:21'!
+esGanadorDeCombate: n
+	^n=ganador ! !
+
+
+!InformeCombate class methodsFor: '--** private fileout/in **--' stamp: 'LL 9/19/2022 22:55:24'!
+initializeCollaboratorsFromFile
+	"Auto generated method for loading purposes - Do not modify it"
+
+	rondaAlcanzada := 4.
+	ganador := 1.! !
+
+
 !classDefinition: #OrquestadorDeCombates category: 'AtaquesFantasticosPaso2'!
 DenotativeObject subclass: #OrquestadorDeCombates
 	instanceVariableNames: ''
@@ -871,32 +915,45 @@ DenotativeObject subclass: #OrquestadorDeCombates
 OrquestadorDeCombates class
 	instanceVariableNames: 'bando1 bando2 cantidadDeCombates'!
 
-!OrquestadorDeCombates class methodsFor: 'as yet unclassified' stamp: 'alr 9/19/2022 16:49:12'!
-desarrollarDuranteRondas: anInteger
-	cantidadDeCombates := anInteger.
-	 1 to: (cantidadDeCombates) do: [ self empezarRonda ].! !
+!OrquestadorDeCombates class methodsFor: 'as yet unclassified' stamp: 'LL 9/19/2022 22:30:11'!
+desarrollarDuranteRondas: rondas
+	InformeCombate Initialize.
+	rondas timesRepeat: [ 
+		bando1 isEmpty ifTrue: [
+			^InformeCombate definirGanador: 2.
+		].
+		bando2 isEmpty ifTrue: [
+			^InformeCombate definirGanador: 1.
+		].
+		InformeCombate aumentarRondaAlcanzada.
+		self empezarRonda.
+	].
+	^InformeCombate definirGanador: 0.! !
 
-!OrquestadorDeCombates class methodsFor: 'as yet unclassified' stamp: 'alr 9/19/2022 16:48:10'!
+!OrquestadorDeCombates class methodsFor: 'as yet unclassified' stamp: 'LL 9/19/2022 21:18:35'!
 empezarRonda
 	bando1 do: [ :combatiente | combatiente atacar ].
-	bando2 do: [ :combatiente | combatiente atacar ].! !
+	bando2 do: [ :combatiente | combatiente atacar ].
+	
+	bando1 := bando1 select: [:combatiente | combatiente estaFueraDeCombate = false].
+	bando2 := bando2 select: [:combatiente | combatiente estaFueraDeCombate = false]. ! !
 
-!OrquestadorDeCombates class methodsFor: 'as yet unclassified' stamp: 'alr 9/19/2022 16:47:53'!
+!OrquestadorDeCombates class methodsFor: 'as yet unclassified' stamp: 'LL 9/19/2022 21:15:53'!
 establecerCombateEntreBando1: unBando1 contraBando2: unBando2
 	bando1 := unBando1.
 	bando2 := unBando2.
 	
-	bando1 do: [ :combatiente | combatiente enemigos: bando2].
+	bando1 do: [ :combatiente | combatiente enemigos: bando2 ].
 	bando2 do: [ :combatiente | combatiente enemigos: bando1 ].! !
 
 
-!OrquestadorDeCombates class methodsFor: '--** private fileout/in **--' stamp: 'alr 9/19/2022 16:51:18'!
+!OrquestadorDeCombates class methodsFor: '--** private fileout/in **--' stamp: 'LL 9/19/2022 22:55:24'!
 initializeCollaboratorsFromFile
 	"Auto generated method for loading purposes - Do not modify it"
 
 	bando1 := ((Array new: 1) at: 1 put: CombatienteHumanoArthas; yourself).
-	bando2 := ((Array new: 1) at: 1 put: CombatienteOrcoOlgra; yourself).
-	cantidadDeCombates := 1.! !
+	bando2 := #().
+	cantidadDeCombates := 10.! !
 
 
 !classDefinition: #OrquestadorDeCombatesTest category: 'AtaquesFantasticosPaso2'!
@@ -912,20 +969,26 @@ DenotativeObject subclass: #OrquestadorDeCombatesTest
 OrquestadorDeCombatesTest class
 	instanceVariableNames: ''!
 
-!OrquestadorDeCombatesTest class methodsFor: 'para completar' stamp: 'JMB 9/14/2022 00:30:51'!
+!OrquestadorDeCombatesTest class methodsFor: 'para completar' stamp: 'LL 9/19/2022 22:20:52'!
 assertElResultadoIndicaQueGanoElBando1: resultadoDeUnCombate alcanzadaLaRonda: unNumeroDeRondaEsperado
+	| a b |
+	a := resultadoDeUnCombate alcanzadaLaRonda: unNumeroDeRondaEsperado.
+	b := resultadoDeUnCombate esGanadorDeCombate: 1.
+	^(a&b)! !
 
-	Assert isTrue: false description: 'Reemplazar esto por la implementación correspondiente'! !
-
-!OrquestadorDeCombatesTest class methodsFor: 'para completar' stamp: 'JMB 9/14/2022 00:30:59'!
+!OrquestadorDeCombatesTest class methodsFor: 'para completar' stamp: 'LL 9/19/2022 22:20:41'!
 assertElResultadoIndicaQueGanoElBando2: resultadoDeUnCombate alcanzadaLaRonda: unNumeroDeRondaEsperado
+	| a b |
+	a := resultadoDeUnCombate alcanzadaLaRonda: unNumeroDeRondaEsperado.
+	b := resultadoDeUnCombate esGanadorDeCombate: 2.
+	^(a&b)! !
 
-	Assert isTrue: false description: 'Reemplazar esto por la implementación correspondiente'! !
-
-!OrquestadorDeCombatesTest class methodsFor: 'para completar' stamp: 'JMB 9/14/2022 00:31:05'!
+!OrquestadorDeCombatesTest class methodsFor: 'para completar' stamp: 'LL 9/19/2022 22:21:26'!
 assertElResultadoIndicaQueNoHayGanador: resultadoDeUnCombate  alcanzadaLaRonda: unNumeroDeRondaEsperado
-
-	Assert isTrue: false description: 'Reemplazar esto por la implementación correspondiente'! !
+	| a b |
+	a := resultadoDeUnCombate alcanzadaLaRonda: unNumeroDeRondaEsperado.
+	b := resultadoDeUnCombate esGanadorDeCombate: 0.
+	^(a&b)! !
 
 !OrquestadorDeCombatesTest class methodsFor: 'para completar' stamp: 'alr 9/19/2022 16:32:05'!
 establecerCombateEntreBando1: unBando1 contraBando2: unBando2
@@ -1076,7 +1139,7 @@ test05AlDesarrollarUnCombateManoAManoGanaElBando1CuandoDejaFueraDeCombateASuRiva
 	
 	self assertElResultadoIndicaQueGanoElBando1: resultado alcanzadaLaRonda: 10.! !
 
-!OrquestadorDeCombatesTest class methodsFor: 'tests - mano a mano' stamp: 'JMB 9/15/2022 00:30:37'!
+!OrquestadorDeCombatesTest class methodsFor: 'tests - mano a mano' stamp: 'LL 9/19/2022 21:24:17'!
 test06AlDesarrollarUnCombateCuandoHayUnGanadorFinalizaEnLaRondaQueElPerdedorQuedoFueraDeCombate
 	
 	| orquestadorDeCombates resultado |
@@ -1167,4 +1230,5 @@ CombatienteHumanoArthas initializeAfterFileIn!
 CombatienteOrcoMankrik initializeAfterFileIn!
 CombatienteOrcoOlgra initializeAfterFileIn!
 CombatientesTest initialize!
+InformeCombate initializeAfterFileIn!
 OrquestadorDeCombates initializeAfterFileIn!
