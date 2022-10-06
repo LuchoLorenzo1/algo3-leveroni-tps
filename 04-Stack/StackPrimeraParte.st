@@ -46,7 +46,7 @@ test04PopReturnsAnElementRemovedFromTheStack
 	
 	self assert: (stack pop = 'Palermo').! !
 
-!StackTest methodsFor: 'tests' stamp: 'alr 10/6/2022 11:57:49'!
+!StackTest methodsFor: 'tests' stamp: 'alr 10/6/2022 12:24:25'!
 test05StackHasLastInFirstOutBehavior
 	| stack |
 	
@@ -91,13 +91,13 @@ size
 	^elementos size.! !
 
 
-!Stack methodsFor: 'operations' stamp: 'alr 10/6/2022 11:37:13'!
+!Stack methodsFor: 'operations' stamp: 'alr 10/6/2022 12:24:11'!
 pop
 	| elementoARemover |
 	(elementos isEmpty) ifTrue: [^self errorRemovingFromEmptyStack].
 	
 	elementoARemover := elementos last.
-	elementos remove: elementoARemover.
+	elementos removeLast.
 	^elementoARemover.! !
 
 !Stack methodsFor: 'operations' stamp: 'alr 10/6/2022 11:03:10'!
