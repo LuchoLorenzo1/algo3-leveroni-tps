@@ -211,7 +211,7 @@ test05SentenceFinderReturnsErrorWhenPrefixContainsBlankSpaces
 		raise: Error
 		withExceptionDo: [ :anError | self assert: SentenceFinderByPrefix invalidPrefixErrorDescription equals: anError messageText ]! !
 
-!SentenceFinderByPrefixTest methodsFor: 'tests' stamp: 'alr 10/14/2022 13:41:00'!
+!SentenceFinderByPrefixTest methodsFor: 'tests' stamp: 'LL 10/14/2022 13:48:44'!
 test06SentenceFinderReturnsStringWhenPrefixIsAtStart
 	|sentenceFinder stack coleccionDeOraciones|
 	
@@ -219,7 +219,7 @@ test06SentenceFinderReturnsStringWhenPrefixIsAtStart
 	stack := OOStack new.
 	
 	stack push: 'winter is coming'.
-	stack push: '	Winter is here'.
+	stack push: 'Winter is here'.
 	stack push: 'winning is everything'.
 	stack push: 'The winds of Winter'.
 	
@@ -228,25 +228,22 @@ test06SentenceFinderReturnsStringWhenPrefixIsAtStart
 	self assert: (coleccionDeOraciones size) equals: 1.
 	self assert: (coleccionDeOraciones at: 1) equals: 'Winter is here'.! !
 
-!SentenceFinderByPrefixTest methodsFor: 'tests' stamp: 'alr 10/14/2022 13:19:57'!
+!SentenceFinderByPrefixTest methodsFor: 'tests' stamp: 'LL 10/14/2022 13:55:32'!
 test07SentenceFinderIsCaseSensitive
-	"|sentenceFinder stack coleccionDeOraciones|
+	|sentenceFinder stack coleccionDeOraciones|
 	
 	sentenceFinder := SentenceFinderByPrefix new.
 	stack := OOStack new.
 	
-	stack push: 'winter is coming'.
-	stack push: 'winning is everything'.
-	stack push: 'The winds of Winter'.
-	stack push: '	Winter is here'.
+	stack push: 'winter is here'.
+	stack push: 'Winter is here'.
 	
 	coleccionDeOraciones := (sentenceFinder find: 'Wint' in: stack).
 	
-	self assert: coleccionDeOraciones size equals: 2.
-	self assert: (coleccionDeOraciones at: 1) equals: 'Invente Roman invente'.
-	self assert: (coleccionDeOraciones at: 2) equals: 'Invente Roman'."! !
+	self assert: coleccionDeOraciones size equals: 1.
+	self assert: (coleccionDeOraciones at: 1) equals: 'Winter is here'.! !
 
-!SentenceFinderByPrefixTest methodsFor: 'tests' stamp: 'alr 10/14/2022 13:23:13'!
+!SentenceFinderByPrefixTest methodsFor: 'tests' stamp: 'LL 10/14/2022 13:53:23'!
 test08StackIsNotModified
 	|sentenceFinder stack coleccionDeOraciones|
 	
@@ -256,11 +253,34 @@ test08StackIsNotModified
 	stack push: 'winter is coming'.
 	stack push: 'winning is everything'.
 	stack push: 'The winds of Winter'.
-	stack push: '	Winter is here'.
+	stack push: 'Winter is here'.
 	
 	coleccionDeOraciones := (sentenceFinder find: 'Wint' in: stack).
 	
-	self assert: (coleccionDeOraciones size) equals: 1.! !
+	self assert: (coleccionDeOraciones size) equals: 1.
+	self assert: (stack pop) equals: 'Winter is here'.
+	self assert: (stack pop) equals: 'The winds of Winter'.
+	self assert: (stack pop) equals: 'winning is everything'.
+	self assert: (stack pop) equals: 'winter is coming'.! !
+
+!SentenceFinderByPrefixTest methodsFor: 'tests' stamp: 'LL 10/14/2022 13:55:15'!
+test09SentenceFinderReturnsDuplicateStringsIfNecessary
+	|sentenceFinder stack coleccionDeOraciones|
+	
+	sentenceFinder := SentenceFinderByPrefix new.
+	stack := OOStack new.
+	
+	stack push: 'winter is coming'.
+	stack push: 'Winter is here'.
+	stack push: 'Winter is here'.
+	stack push: 'Winter is here'.
+	stack push: 'Winter is here'.
+	
+	coleccionDeOraciones := sentenceFinder find: 'Wint' in: stack.
+	
+	self assert: (coleccionDeOraciones size) equals: 4.
+	self assert: (coleccionDeOraciones at: 1) equals: 'Winter is here'.
+	self assert: (coleccionDeOraciones at: 4) equals: 'Winter is here'.! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
@@ -324,7 +344,7 @@ Object subclass: #OOStackElemento
 	poolDictionaries: ''
 	category: 'Stack-Exercise'!
 
-!OOStackElemento methodsFor: 'as yet unclassified' stamp: 'alr 10/13/2022 20:24:29'!
+!OOStackElemento methodsFor: 'testing' stamp: 'alr 10/13/2022 20:24:29'!
 isEmpty
 	self subclassResponsibility ! !
 
@@ -336,19 +356,21 @@ OOStackElemento subclass: #Base
 	poolDictionaries: ''
 	category: 'Stack-Exercise'!
 
-!Base methodsFor: 'as yet unclassified' stamp: 'alr 10/13/2022 17:57:33'!
-isEmpty
-	^true.! !
-
-!Base methodsFor: 'as yet unclassified' stamp: 'alr 10/14/2022 11:57:38'!
+!Base methodsFor: 'removing' stamp: 'alr 10/14/2022 11:57:38'!
 pop
 	OOStack stackEmptyErrorDescription.! !
 
-!Base methodsFor: 'as yet unclassified' stamp: 'alr 10/13/2022 19:10:21'!
+
+!Base methodsFor: 'operations' stamp: 'alr 10/13/2022 17:57:33'!
+isEmpty
+	^true.! !
+
+
+!Base methodsFor: 'accesing' stamp: 'alr 10/13/2022 19:10:21'!
 size
 	^0.! !
 
-!Base methodsFor: 'as yet unclassified' stamp: 'alr 10/13/2022 19:04:08'!
+!Base methodsFor: 'accesing' stamp: 'alr 10/13/2022 19:04:08'!
 value
 	self error: OOStack stackEmptyErrorDescription.! !
 
@@ -369,19 +391,20 @@ isEmpty
 size
 	^anterior size + 1.! !
 
+!Nodo methodsFor: 'testing' stamp: 'alr 10/13/2022 19:03:51'!
+value
+	^dato! !
 
-!Nodo methodsFor: 'as yet unclassified' stamp: 'alr 10/13/2022 18:40:04'!
+
+!Nodo methodsFor: 'accesing' stamp: 'alr 10/13/2022 18:40:04'!
 anterior
 	^anterior! !
 
-!Nodo methodsFor: 'as yet unclassified' stamp: 'alr 10/13/2022 18:09:39'!
+
+!Nodo methodsFor: 'initialization' stamp: 'alr 10/13/2022 18:09:39'!
 initializeWith: aString over: nodoAnterior
 	dato := aString.
 	anterior := nodoAnterior.! !
-
-!Nodo methodsFor: 'as yet unclassified' stamp: 'alr 10/13/2022 19:03:51'!
-value
-	^dato! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
@@ -401,7 +424,7 @@ Object subclass: #SentenceFinderByPrefix
 	poolDictionaries: ''
 	category: 'Stack-Exercise'!
 
-!SentenceFinderByPrefix methodsFor: 'as yet unclassified' stamp: 'alr 10/14/2022 13:39:55'!
+!SentenceFinderByPrefix methodsFor: 'finder' stamp: 'alr 10/14/2022 13:39:55'!
 find: aPrefixToSearch in: aStack
 	| coleccionDeStrings elementoEliminado|
 	
@@ -419,7 +442,8 @@ find: aPrefixToSearch in: aStack
 	
 	^coleccionDeStrings.! !
 
-!SentenceFinderByPrefix methodsFor: 'as yet unclassified' stamp: 'alr 10/14/2022 12:06:53'!
+
+!SentenceFinderByPrefix methodsFor: 'initialization' stamp: 'alr 10/14/2022 12:06:53'!
 initialize
 	stackAuxiliar := OOStack new.! !
 
