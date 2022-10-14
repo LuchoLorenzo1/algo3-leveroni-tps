@@ -14,7 +14,7 @@ test01StackShouldBeEmptyWhenCreated
 	
 	self assert: stack isEmpty! !
 
-!StackTest methodsFor: 'tests' stamp: 'alr 10/6/2022 11:49:42'!
+!StackTest methodsFor: 'tests' stamp: 'alr 10/6/2022 14:33:43'!
 test02PushAddsAnElementToTheStack
 	| stack |
 	
@@ -22,9 +22,9 @@ test02PushAddsAnElementToTheStack
 	
 	stack push: 'Algo3'.
 	
-	self assert: stack size = 1.! !
+	self deny: stack isEmpty.! !
 
-!StackTest methodsFor: 'tests' stamp: 'alr 10/6/2022 11:56:44'!
+!StackTest methodsFor: 'tests' stamp: 'alr 10/6/2022 14:33:51'!
 test03PopRemovesAnElementFromTheStack
 	| stack |
 	
@@ -60,19 +60,17 @@ test05StackHasLastInFirstOutBehavior
 	self assert: (stack pop = 'Messi').
 	self assert: (stack pop = 10).! !
 
-!StackTest methodsFor: 'tests' stamp: 'alr 10/6/2022 11:56:19'!
+!StackTest methodsFor: 'tests' stamp: 'alr 10/6/2022 14:41:50'!
 test06TopReturnsLastElementWithoutRemovingItFromTheStack
 	| stack |
 	
 	stack := Stack new.
 	
 	stack push: 'Messi'.
-	 
-	self assert: (stack size = 1).
 	
 	self assert: (stack top = 'Messi').
 	
-	self assert: (stack size = 1).! !
+	self deny: (stack isEmpty).! !
 
 
 !classDefinition: #Stack category: 'StackPrimeraParte'!
@@ -91,12 +89,10 @@ size
 	^elementos size.! !
 
 
-!Stack methodsFor: 'operations' stamp: 'alr 10/6/2022 12:24:11'!
+!Stack methodsFor: 'operations' stamp: 'alr 10/11/2022 20:39:55'!
 pop
 	| elementoARemover |
-	(elementos isEmpty) ifTrue: [^self errorRemovingFromEmptyStack].
-	
-	elementoARemover := elementos last.
+	elementoARemover := self top.
 	elementos removeLast.
 	^elementoARemover.! !
 
@@ -104,8 +100,10 @@ pop
 push: element.
 	elementos add: element.! !
 
-!Stack methodsFor: 'operations' stamp: 'alr 10/6/2022 11:15:04'!
+!Stack methodsFor: 'operations' stamp: 'alr 10/11/2022 20:42:50'!
 top
+	(elementos isEmpty) ifTrue: [self error: self emptyStackErrorDescription].
+	
 	^elementos last.! !
 
 
@@ -114,6 +112,6 @@ initialize
 	elementos := OrderedCollection new.! !
 
 
-!Stack methodsFor: 'errors' stamp: 'alr 10/6/2022 11:42:22'!
-errorRemovingFromEmptyStack
-	^'No puedo borrar de un stack vacio!!'.! !
+!Stack methodsFor: 'errors' stamp: 'alr 10/11/2022 20:38:40'!
+emptyStackErrorDescription
+	^'El stack se encuentra vacio!!'.! !
