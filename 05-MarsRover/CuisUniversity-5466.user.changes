@@ -1,0 +1,1488 @@
+
+
+----QUIT----(22 August 2022 12:39:39) CuisUniversity-5466.image priorSource: 2778666!
+
+----STARTUP---- (22 August 2022 12:39:39) as /Users/hernan/Documents/Cuis/5.0-64Bits/Cuis-University-Installer/CuisUniversity-5466.image!
+
+
+----QUIT----(22 August 2022 12:39:39) CuisUniversity-5466.image priorSource: 7018121!
+
+----STARTUP---- (30 October 2022 19:52:09) as /home/lucho/Desktop/algo3/linux64/CuisUniversity-5466.image!
+
+
+----End fileIn of /home/lucho/Desktop/algo3/TPMarsRover.st----!
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 19:52:52' prior: 50551043!
+command: aStringCommand
+	| i offsetX offsetY |
+	aStringCommand isEmpty ifTrue: [^self].
+	
+	offsetX := 0.
+	offsetY := 0.	
+	i := 1.
+	
+	[i < aStringCommand size] whileTrue:[
+		(aStringCommand at: 	i) = 'f' ifTrue: [offsetX := offsetX + 1].
+		(aStringCommand at: 	i) = 'b' ifTrue: [offsetY := offsetY + 1].
+		i := i +1.
+	].
+
+	actualPosition := (actualPosition x + offsetX)@(actualPosition y + offsetY).! !
+
+!testRun: #TestMarsRover #test01RoverSeInicializaCorrectamente stamp: 'LL 10/30/2022 19:52:58'!
+PASSED!
+
+!testRun: #TestMarsRover #test02RoverPuedeAvanzarUnoHaciaAdelante stamp: 'LL 10/30/2022 19:52:58'!
+FAILURE!
+
+!testRun: #TestMarsRover #test03RoverNoHaceNadaConUnComandoVacio stamp: 'LL 10/30/2022 19:52:58'!
+PASSED!
+
+!testRun: #TestMarsRover #test04RoverNoCambiaSuPosicionSiAvanzaYRetrocede stamp: 'LL 10/30/2022 19:52:58'!
+PASSED!
+
+!testRun: #TestMarsRover #test02RoverPuedeAvanzarUnoHaciaAdelante stamp: 'LL 10/30/2022 19:52:58'!
+FAILURE!
+
+!testRun: #TestMarsRover #test04RoverNoCambiaSuPosicionSiAvanzaYRetrocede stamp: 'LL 10/30/2022 19:53:28'!
+PASSED!
+
+!testRun: #TestMarsRover #test04RoverNoCambiaSuPosicionSiAvanzaYRetrocede stamp: 'LL 10/30/2022 19:53:30'!
+PASSED!
+
+!testRun: #TestMarsRover #test03RoverNoHaceNadaConUnComandoVacio stamp: 'LL 10/30/2022 19:53:31'!
+PASSED!
+
+!testRun: #TestMarsRover #test01RoverSeInicializaCorrectamente stamp: 'LL 10/30/2022 19:53:34'!
+PASSED!
+
+!testRun: #TestMarsRover #test02RoverPuedeAvanzarUnoHaciaAdelante stamp: 'LL 10/30/2022 19:53:34'!
+FAILURE!
+
+!testRun: #TestMarsRover #test03RoverNoHaceNadaConUnComandoVacio stamp: 'LL 10/30/2022 19:53:34'!
+PASSED!
+
+!testRun: #TestMarsRover #test04RoverNoCambiaSuPosicionSiAvanzaYRetrocede stamp: 'LL 10/30/2022 19:53:34'!
+PASSED!
+
+!testRun: #TestMarsRover #test02RoverPuedeAvanzarUnoHaciaAdelante stamp: 'LL 10/30/2022 19:53:34'!
+FAILURE!
+
+!testRun: #TestMarsRover #test01RoverSeInicializaCorrectamente stamp: 'LL 10/30/2022 19:53:36'!
+PASSED!
+
+!testRun: #TestMarsRover #test02RoverPuedeAvanzarUnoHaciaAdelante stamp: 'LL 10/30/2022 19:53:38'!
+FAILURE!
+
+!testRun: #TestMarsRover #test02RoverPuedeAvanzarUnoHaciaAdelante stamp: 'LL 10/30/2022 19:53:38'!
+FAILURE!
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 19:54:00' prior: 50551091!
+command: aStringCommand
+	| i offsetX offsetY |
+	aStringCommand isEmpty ifTrue: [^self].
+	
+	offsetX := 0.
+	offsetY := 0.	
+	i := 1.
+	
+	[i < aStringCommand size] whileTrue:[
+		((aStringCommand at: 	i) = 'f') ifTrue: [offsetX := offsetX + 1].
+		((aStringCommand at: 	i) = 'b') ifTrue: [offsetY := offsetY + 1].
+		i := i +1.
+	].
+
+	actualPosition := (actualPosition x + offsetX)@(actualPosition y + offsetY).! !
+
+!testRun: #TestMarsRover #test01RoverSeInicializaCorrectamente stamp: 'LL 10/30/2022 19:54:07'!
+PASSED!
+
+!testRun: #TestMarsRover #test02RoverPuedeAvanzarUnoHaciaAdelante stamp: 'LL 10/30/2022 19:54:07'!
+FAILURE!
+
+!testRun: #TestMarsRover #test03RoverNoHaceNadaConUnComandoVacio stamp: 'LL 10/30/2022 19:54:07'!
+PASSED!
+
+!testRun: #TestMarsRover #test04RoverNoCambiaSuPosicionSiAvanzaYRetrocede stamp: 'LL 10/30/2022 19:54:07'!
+PASSED!
+
+!testRun: #TestMarsRover #test02RoverPuedeAvanzarUnoHaciaAdelante stamp: 'LL 10/30/2022 19:54:07'!
+FAILURE!
+
+aStringCommand size!
+
+aStringCommand at: 0!
+
+aStringCommand at: 1!
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 19:55:00' prior: 50551162!
+command: aStringCommand
+	| i offsetX offsetY |
+	aStringCommand isEmpty ifTrue: [^self].
+	
+	offsetX := 0.
+	offsetY := 0.	
+	i := 1.
+	
+	[i <= aStringCommand size] whileTrue:[
+		((aStringCommand at: 	i) = 'f') ifTrue: [offsetX := offsetX + 1].
+		((aStringCommand at: 	i) = 'b') ifTrue: [offsetY := offsetY + 1].
+		i := i +1.
+	].
+
+	actualPosition := (actualPosition x + offsetX)@(actualPosition y + offsetY).! !
+
+!testRun: #TestMarsRover #test02RoverPuedeAvanzarUnoHaciaAdelante stamp: 'LL 10/30/2022 19:55:03'!
+FAILURE!
+
+!testRun: #TestMarsRover #test02RoverPuedeAvanzarUnoHaciaAdelante stamp: 'LL 10/30/2022 19:55:03'!
+FAILURE!
+
+!testRun: #TestMarsRover #test02RoverPuedeAvanzarUnoHaciaAdelante stamp: 'LL 10/30/2022 19:55:07'!
+FAILURE!
+
+!testRun: #TestMarsRover #test02RoverPuedeAvanzarUnoHaciaAdelante stamp: 'LL 10/30/2022 19:55:07'!
+FAILURE!
+
+!testRun: #TestMarsRover #test01RoverSeInicializaCorrectamente stamp: 'LL 10/30/2022 19:55:31'!
+PASSED!
+
+!testRun: #TestMarsRover #test02RoverPuedeAvanzarUnoHaciaAdelante stamp: 'LL 10/30/2022 19:55:31'!
+FAILURE!
+
+!testRun: #TestMarsRover #test03RoverNoHaceNadaConUnComandoVacio stamp: 'LL 10/30/2022 19:55:31'!
+PASSED!
+
+!testRun: #TestMarsRover #test04RoverNoCambiaSuPosicionSiAvanzaYRetrocede stamp: 'LL 10/30/2022 19:55:31'!
+PASSED!
+
+!testRun: #TestMarsRover #test02RoverPuedeAvanzarUnoHaciaAdelante stamp: 'LL 10/30/2022 19:55:31'!
+FAILURE!
+
+'f' size!
+
+'f' at: 1!
+
+aStringCommand at: 1 = 'f'!
+
+aStringCommand at: 1 = $f!
+
+(aStringCommand at: 1) = $f!
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 19:56:37' prior: 50551197!
+command: aStringCommand
+	| i offsetX offsetY |
+	aStringCommand isEmpty ifTrue: [^self].
+	
+	offsetX := 0.
+	offsetY := 0.	
+	i := 1.
+	
+	[i <= aStringCommand size] whileTrue:[
+		((aStringCommand at: 	i) = $f) ifTrue: [offsetX := offsetX + 1].
+		((aStringCommand at: 	i) = $f) ifTrue: [offsetY := offsetY + 1].
+		i := i +1.
+	].
+
+	actualPosition := (actualPosition x + offsetX)@(actualPosition y + offsetY).! !
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 19:56:39' prior: 50551247!
+command: aStringCommand
+	| i offsetX offsetY |
+	aStringCommand isEmpty ifTrue: [^self].
+	
+	offsetX := 0.
+	offsetY := 0.	
+	i := 1.
+	
+	[i <= aStringCommand size] whileTrue:[
+		((aStringCommand at: 	i) = $f) ifTrue: [offsetX := offsetX + 1].
+		((aStringCommand at: 	i) = $b) ifTrue: [offsetY := offsetY + 1].
+		i := i +1.
+	].
+
+	actualPosition := (actualPosition x + offsetX)@(actualPosition y + offsetY).! !
+
+!testRun: #TestMarsRover #test01RoverSeInicializaCorrectamente stamp: 'LL 10/30/2022 19:56:43'!
+PASSED!
+
+!testRun: #TestMarsRover #test02RoverPuedeAvanzarUnoHaciaAdelante stamp: 'LL 10/30/2022 19:56:43'!
+FAILURE!
+
+!testRun: #TestMarsRover #test03RoverNoHaceNadaConUnComandoVacio stamp: 'LL 10/30/2022 19:56:43'!
+PASSED!
+
+!testRun: #TestMarsRover #test04RoverNoCambiaSuPosicionSiAvanzaYRetrocede stamp: 'LL 10/30/2022 19:56:43'!
+FAILURE!
+
+!testRun: #TestMarsRover #test02RoverPuedeAvanzarUnoHaciaAdelante stamp: 'LL 10/30/2022 19:56:51'!
+FAILURE!
+
+'f' size!
+
+'f' at: 1!
+
+'f' at: 1!
+
+actualPosition x!
+!TestMarsRover methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 19:58:12' prior: 50551001!
+test02RoverPuedeAvanzarUnoHaciaAdelante
+	| robot |
+	robot := MarsRover InitializeInPosition: 0 andY: 0 pointingTo: #N.
+	
+	robot command: 'f'.
+
+	self assert: (robot position = (1@0)).! !
+
+!testRun: #TestMarsRover #test02RoverPuedeAvanzarUnoHaciaAdelante stamp: 'LL 10/30/2022 19:58:16'!
+PASSED!
+
+!testRun: #TestMarsRover #test01RoverSeInicializaCorrectamente stamp: 'LL 10/30/2022 19:58:19'!
+PASSED!
+
+!testRun: #TestMarsRover #test02RoverPuedeAvanzarUnoHaciaAdelante stamp: 'LL 10/30/2022 19:58:19'!
+PASSED!
+
+!testRun: #TestMarsRover #test03RoverNoHaceNadaConUnComandoVacio stamp: 'LL 10/30/2022 19:58:19'!
+PASSED!
+
+!testRun: #TestMarsRover #test04RoverNoCambiaSuPosicionSiAvanzaYRetrocede stamp: 'LL 10/30/2022 19:58:19'!
+FAILURE!
+
+!testRun: #TestMarsRover #test04RoverNoCambiaSuPosicionSiAvanzaYRetrocede stamp: 'LL 10/30/2022 19:58:19'!
+FAILURE!
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 19:59:38' prior: 50551263!
+command: aStringCommand
+	| i offsetX offsetY |
+	aStringCommand isEmpty ifTrue: [^self].
+	
+	offsetX := 0.
+	offsetY := 0.	
+	i := 1.
+	
+	[i <= aStringCommand size] whileTrue:[
+		((aStringCommand at: 	i) = $f) ifTrue: [offsetX := offsetX + 1].
+		((aStringCommand at: 	i) = $b) ifTrue: [offsetY := offsetY - 1].
+		i := i +1.
+	].
+
+	actualPosition := (actualPosition x + offsetX)@(actualPosition y + offsetY).! !
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 19:59:47' prior: 50551328!
+command: aStringCommand
+	| i offsetX offsetY |
+	aStringCommand isEmpty ifTrue: [^self].
+	
+	offsetX := 0.
+	offsetY := 0.	
+	i := 1.
+	
+	[i <= aStringCommand size] whileTrue:[
+		((aStringCommand at: 	i) = $f) ifTrue: [offsetX := offsetX + 1].
+		((aStringCommand at: 	i) = $b) ifTrue: [offsetX := offsetX- 1].
+		i := i +1.
+	].
+
+	actualPosition := (actualPosition x + offsetX)@(actualPosition y + offsetY).! !
+
+!testRun: #TestMarsRover #test01RoverSeInicializaCorrectamente stamp: 'LL 10/30/2022 19:59:49'!
+PASSED!
+
+!testRun: #TestMarsRover #test02RoverPuedeAvanzarUnoHaciaAdelante stamp: 'LL 10/30/2022 19:59:49'!
+PASSED!
+
+!testRun: #TestMarsRover #test03RoverNoHaceNadaConUnComandoVacio stamp: 'LL 10/30/2022 19:59:49'!
+PASSED!
+
+!testRun: #TestMarsRover #test04RoverNoCambiaSuPosicionSiAvanzaYRetrocede stamp: 'LL 10/30/2022 19:59:49'!
+PASSED!
+!TestMarsRover methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:00:09'!
+test05RoverPuedeCambiarDeDireccion
+	| robot |
+	robot := MarsRover InitializeInPosition: 0 andY: 0 pointingTo: #N.
+	
+	robot command: 'fb'.
+
+	self assert: (robot direction = #N).
+	self assert: (robot position = (0@0)).! !
+!TestMarsRover methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:00:35' prior: 50551373!
+test05RoverPuedeCambiarDeDireccion
+	| robot |
+	robot := MarsRover InitializeInPosition: 0 andY: 0 pointingTo: #N.
+	
+	robot command: 'l'.
+
+	self assert: (robot direction = #E).! !
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:01:31' prior: 50551344!
+command: aStringCommand
+	| i offsetX offsetY |
+	aStringCommand isEmpty ifTrue: [^self].
+	
+	offsetX := 0.
+	offsetY := 0.	
+	i := 1.
+	
+	[i <= aStringCommand size] whileTrue:[
+		((aStringCommand at: 	i) = $f) ifTrue: [offsetX := offsetX + 1].
+		((aStringCommand at: 	i) = $b) ifTrue: [offsetX := offsetX- 1].
+		((aStringCommand at: 	i) = $l) ifTrue: [actualDirection := #O].
+		((aStringCommand at: 	i) = $r) ifTrue: [actualDirection := #E].
+		i := i +1.
+	].
+
+	actualPosition := (actualPosition x + offsetX)@(actualPosition y + offsetY).! !
+
+!testRun: #TestMarsRover #test05RoverPuedeCambiarDeDireccion stamp: 'LL 10/30/2022 20:01:47'!
+FAILURE!
+!TestMarsRover methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:01:55' prior: 50551383!
+test05RoverPuedeCambiarDeDireccion
+	| robot |
+	robot := MarsRover InitializeInPosition: 0 andY: 0 pointingTo: #N.
+	
+	robot command: 'l'.
+
+	self assert: (robot direction = #O).! !
+
+!testRun: #TestMarsRover #test05RoverPuedeCambiarDeDireccion stamp: 'LL 10/30/2022 20:01:55'!
+PASSED!
+
+!testRun: #TestMarsRover #test01RoverSeInicializaCorrectamente stamp: 'LL 10/30/2022 20:01:55'!
+PASSED!
+
+!testRun: #TestMarsRover #test02RoverPuedeAvanzarUnoHaciaAdelante stamp: 'LL 10/30/2022 20:01:55'!
+PASSED!
+
+!testRun: #TestMarsRover #test03RoverNoHaceNadaConUnComandoVacio stamp: 'LL 10/30/2022 20:01:55'!
+PASSED!
+
+!testRun: #TestMarsRover #test04RoverNoCambiaSuPosicionSiAvanzaYRetrocede stamp: 'LL 10/30/2022 20:01:55'!
+PASSED!
+
+!testRun: #TestMarsRover #test05RoverPuedeCambiarDeDireccion stamp: 'LL 10/30/2022 20:01:55'!
+PASSED!
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:04:39' prior: 50551392!
+command: aStringCommand
+	| i offsetX offsetY cardinales |
+	aStringCommand isEmpty ifTrue: [^self].
+	
+	offsetX := 0.
+	offsetY := 0.	
+	i := 1.
+	
+	cardinales := #(#N, #E, #S, #O).
+	
+	[i <= aStringCommand size] whileTrue:[
+		((aStringCommand at: 	i) = $f) ifTrue: [offsetX := offsetX + 1].
+		((aStringCommand at: 	i) = $b) ifTrue: [offsetX := offsetX- 1].
+		((aStringCommand at: 	i) = $l) ifTrue: [actualDirection := #O].
+		((aStringCommand at: 	i) = $r) ifTrue: [actualDirection := #E].
+		i := i +1.
+	].
+
+	actualPosition := (actualPosition x + offsetX)@(actualPosition y + offsetY).! !
+
+cardinales := #(#N, #E, #S, #O).!
+
+cardinales indexOf: #N.!
+
+cardinales indexOf: #E.!
+
+cardinales indexOf: #S.!
+
+cardinales indexOf: #O.!
+
+cardinales indexOf: #O.!
+
+cardinales indexOf: #O.!
+
+cardinales indexOf: #O.2!
+
+cardinales indexOf: #O.!
+
+cardinales indexOf: #O.!
+
+cardinales indexOf: #O.!
+
+cardinales indexOf: #O.!
+
+cardinales indexOf: #N!
+
+cardinales indexOf: #E!
+
+cardinales indexOf: #S!
+
+cardinales := #(#N, #E, #S, #O). !
+
+cardinales := #(#N, #E, #S, #O). !
+
+cardinales := #(#N, #E, #S, #O). !
+
+cardinales := #(#N, #E, #S, #O). !
+
+cardinales := #(#N, #E, #S, #O). !
+
+cardinales := #(#N, #E, #S, #O). !
+
+cardinales := #(#N, #E, #S, #O). !
+
+cardinales := #(#N, #E, #S, #O). !
+
+cardinales := #(#N, #E, #S, #O). !
+
+cardinales := #(#N, #E, #S, #O). !
+
+cardinales := #(#N, #E, #S, #O). !
+
+cardinales := #(#N, #E, #S, #O). !
+
+cardinales indexOf: #S.!
+
+cardinales indexOf: #S.!
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:09:46' prior: 50551445!
+command: aStringCommand
+	| i offsetX offsetY cardinales |
+	aStringCommand isEmpty ifTrue: [^self].
+	
+	offsetX := 0.
+	offsetY := 0.	
+	i := 1.
+	
+	cardinales := #(#N, #E, #S, #O).
+	
+	[i <= aStringCommand size] whileTrue:[
+		((aStringCommand at: 	i) = $f) ifTrue: [offsetX := offsetX + 1].
+		((aStringCommand at: 	i) = $b) ifTrue: [offsetX := offsetX- 1].
+		((aStringCommand at: 	i) = $l) ifTrue: [self rotarIzquierda].
+		((aStringCommand at: 	i) = $r) ifTrue: [actualDirection := #E].
+		i := i +1.
+	].
+
+	actualPosition := (actualPosition x + offsetX)@(actualPosition y + offsetY).! !
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:12:35' prior: 50551494!
+command: aStringCommand
+	| i offsetX offsetY cardinales |
+	aStringCommand isEmpty ifTrue: [^self].
+	
+	offsetX := 0.
+	offsetY := 0.	
+	i := 1.
+	
+	cardinales := #(#N, #E, #S, #O).
+	
+	[i <= aStringCommand size] whileTrue:[
+		((aStringCommand at: 	i) = $f) ifTrue: [offsetX := offsetX + 1].
+		((aStringCommand at: 	i) = $b) ifTrue: [offsetX := offsetX - 1].
+		((aStringCommand at: 	i) = $l) ifTrue: [self rotarIzquierda].
+		((aStringCommand at: 	i) = $r) ifTrue: [actualDirection := #E].
+		i := i +1.
+	].
+
+	actualPosition := (actualPosition x + offsetX)@(actualPosition y + offsetY).! !
+
+Object subclass: #Orientacion
+	instanceVariableNames: 'actualPosition actualDirection'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TPMarsRover'!
+
+!classDefinition: #Orientacion category: 'TPMarsRover' stamp: 'LL 10/30/2022 20:14:00'!
+Object subclass: #Orientacion
+	instanceVariableNames: 'actualPosition actualDirection'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TPMarsRover'!
+
+Orientacion subclass: #Norte
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TPMarsRover'!
+
+!classDefinition: #Norte category: 'TPMarsRover' stamp: 'LL 10/30/2022 20:14:15'!
+Orientacion subclass: #Norte
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TPMarsRover'!
+
+Orientacion subclass: #Sur
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TPMarsRover'!
+
+!classDefinition: #Sur category: 'TPMarsRover' stamp: 'LL 10/30/2022 20:14:18'!
+Orientacion subclass: #Sur
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TPMarsRover'!
+
+Orientacion subclass: #Este
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TPMarsRover'!
+
+!classDefinition: #Este category: 'TPMarsRover' stamp: 'LL 10/30/2022 20:14:19'!
+Orientacion subclass: #Este
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TPMarsRover'!
+
+Orientacion subclass: #Oeste
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TPMarsRover'!
+
+!classDefinition: #Oeste category: 'TPMarsRover' stamp: 'LL 10/30/2022 20:14:22'!
+Orientacion subclass: #Oeste
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TPMarsRover'!
+
+Object subclass: #Orientacion
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TPMarsRover'!
+
+!classDefinition: #Orientacion category: 'TPMarsRover' stamp: 'LL 10/30/2022 20:14:27'!
+Object subclass: #Orientacion
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TPMarsRover'!
+!Este methodsFor: 'nil' stamp: 'LL 10/30/2022 20:14:52'!
+rotarIzquierda
+	^Sur new.! !
+!Norte methodsFor: 'nil' stamp: 'LL 10/30/2022 20:15:02'!
+rotarIzquierda
+	^Este new.! !
+!Oeste methodsFor: 'nil' stamp: 'LL 10/30/2022 20:15:09'!
+rotarIzquierda
+	^Norte new.! !
+!Sur methodsFor: 'nil' stamp: 'LL 10/30/2022 20:15:24'!
+rotarIzquierda
+	^Este new.! !
+!Sur methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:16:37' prior: 50551611!
+rotarIzquierda
+	^Oeste new.! !
+!Este methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:16:55'!
+rotarDerecha
+	^Norte new.! !
+!Norte methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:17:03'!
+rotarDerecha
+	^Oeste new.! !
+!Oeste methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:17:11'!
+rotarDerecha
+	^Sur new.! !
+!Sur methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:17:17'!
+rotarDerecha
+	^Oeste new.! !
+!Sur methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:17:21' prior: 50551631!
+rotarDerecha
+	^Este new.! !
+!Orientacion methodsFor: 'nil' stamp: 'LL 10/30/2022 20:17:48'!
+rotarIzquierda
+	self subclassResponsibility.! !
+!Orientacion methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:17:53'!
+rotarDerecha
+	self subclassResponsibility.! !
+!MarsRover class methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:18:08' prior: 50551081!
+InitializeInPosition: anXPosition andY: aYPosition pointingTo: aCardinal 
+	^self new inPosition: (anXPosition@aYPosition) pointingTo: aCardinal.! !
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:18:56' prior: 50551062!
+inPosition: aCardinalPoint pointingTo: aDirection
+	
+	actualPosition := aCardinalPoint.
+	
+	actualDirection := Orientacion initializeWithDirection: aDirection.! !
+!Orientacion class methodsFor: 'nil' stamp: 'LL 10/30/2022 20:20:37'!
+initializeWithDirection: aDireccion
+	
+	| subclase |
+	subclase := self subclasses detect: [:subclass | subclass tePerteneceLaDireccion: aDireccion ].
+	^subclase new.
+! !
+!Orientacion class methodsFor: 'nil' stamp: 'LL 10/30/2022 20:21:04'!
+tePerteneceLaDireccion: aDireccion
+	self subclassResponsibility.! !
+!Este class methodsFor: 'nil' stamp: 'LL 10/30/2022 20:21:28' overrides: 50551671!
+tePerteneceLaDireccion: aDireccion
+	^aDireccion = #E! !
+!Norte class methodsFor: 'nil' stamp: 'LL 10/30/2022 20:21:33' overrides: 50551671!
+tePerteneceLaDireccion: aDireccion
+	^aDireccion = #N! !
+!Oeste class methodsFor: 'nil' stamp: 'LL 10/30/2022 20:21:38' overrides: 50551671!
+tePerteneceLaDireccion: aDireccion
+	^aDireccion = #O! !
+!Sur class methodsFor: 'nil' stamp: 'LL 10/30/2022 20:21:44' overrides: 50551671!
+tePerteneceLaDireccion: aDireccion
+	^aDireccion = #S! !
+
+!testRun: #TestMarsRover #test01RoverSeInicializaCorrectamente stamp: 'LL 10/30/2022 20:21:49'!
+FAILURE!
+
+!testRun: #TestMarsRover #test02RoverPuedeAvanzarUnoHaciaAdelante stamp: 'LL 10/30/2022 20:21:49'!
+PASSED!
+
+!testRun: #TestMarsRover #test03RoverNoHaceNadaConUnComandoVacio stamp: 'LL 10/30/2022 20:21:49'!
+FAILURE!
+
+!testRun: #TestMarsRover #test04RoverNoCambiaSuPosicionSiAvanzaYRetrocede stamp: 'LL 10/30/2022 20:21:49'!
+FAILURE!
+
+!testRun: #TestMarsRover #test05RoverPuedeCambiarDeDireccion stamp: 'LL 10/30/2022 20:21:49'!
+ERROR!
+!Orientacion class methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:22:13' prior: 50551663!
+initializeWithDirection: aDireccion
+	| subclase |
+	subclase := self subclasses detect: [:subclass | subclass tePerteneceLaDireccion: aDireccion ].
+	^subclase new.
+! !
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:22:39' prior: 50551655!
+inPosition: aCardinalPoint pointingTo: aDirection
+	
+	actualPosition := aCardinalPoint.
+	actualDirection := Orientacion initializeWithDirection: aDirection.! !
+!Este class methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:23:46'!
+simbolo
+	^#E! !
+!Norte class methodsFor: 'nil' stamp: 'LL 10/30/2022 20:23:58'!
+simbolo
+	^#N! !
+!Oeste class methodsFor: 'nil' stamp: 'LL 10/30/2022 20:24:14'!
+simbolo
+	^#N! !
+
+	^#O!
+!Oeste class methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:24:16' prior: 50551736!
+simbolo
+	^#O! !
+!Sur class methodsFor: 'nil' stamp: 'LL 10/30/2022 20:24:23'!
+simbolo
+	^#S! !
+!Orientacion class methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:24:32'!
+simbolo 
+	self subclassResponsibility.! !
+!Orientacion class methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:24:38' prior: 50551713!
+initializeWithDirection: aDireccion
+	| subclase |
+	subclase := self subclasses detect: [:subclass | subclass simbolo = aDireccion ].
+	^subclase new.
+! !
+
+!methodRemoval: Orientacion class #tePerteneceLaDireccion: stamp: 'LL 10/30/2022 20:24:40'!
+tePerteneceLaDireccion: aDireccion
+	self subclassResponsibility.!
+
+!methodRemoval: Este class #tePerteneceLaDireccion: stamp: 'LL 10/30/2022 20:24:41'!
+tePerteneceLaDireccion: aDireccion
+	^aDireccion = #E!
+
+!methodRemoval: Norte class #tePerteneceLaDireccion: stamp: 'LL 10/30/2022 20:24:44'!
+tePerteneceLaDireccion: aDireccion
+	^aDireccion = #N!
+
+!methodRemoval: Oeste class #tePerteneceLaDireccion: stamp: 'LL 10/30/2022 20:24:46'!
+tePerteneceLaDireccion: aDireccion
+	^aDireccion = #O!
+
+!methodRemoval: Sur class #tePerteneceLaDireccion: stamp: 'LL 10/30/2022 20:24:47'!
+tePerteneceLaDireccion: aDireccion
+	^aDireccion = #S!
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:25:01' prior: 50551058!
+direction
+	^actualDirection simbolo.! !
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:25:29' prior: 50551516!
+command: aStringCommand
+	| i offsetX offsetY cardinales |
+	aStringCommand isEmpty ifTrue: [^self].
+	
+	offsetX := 0.
+	offsetY := 0.	
+	i := 1.
+	
+	[i <= aStringCommand size] whileTrue:[
+		((aStringCommand at: 	i) = $f) ifTrue: [offsetX := offsetX + 1].
+		((aStringCommand at: 	i) = $b) ifTrue: [offsetX := offsetX - 1].
+		((aStringCommand at: 	i) = $l) ifTrue: [actualDirection rotarIzquierda].
+		((aStringCommand at: 	i) = $r) ifTrue: [actualDirection rotarDerecha].
+		i := i +1.
+	].
+
+	actualPosition := (actualPosition x + offsetX)@(actualPosition y + offsetY).! !
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:25:35' prior: 50551788!
+command: aStringCommand
+	| i offsetX offsetY  |
+	aStringCommand isEmpty ifTrue: [^self].
+	
+	offsetX := 0.
+	offsetY := 0.	
+	i := 1.
+	
+	[i <= aStringCommand size] whileTrue:[
+		((aStringCommand at: 	i) = $f) ifTrue: [offsetX := offsetX + 1].
+		((aStringCommand at: 	i) = $b) ifTrue: [offsetX := offsetX - 1].
+		((aStringCommand at: 	i) = $l) ifTrue: [actualDirection rotarIzquierda].
+		((aStringCommand at: 	i) = $r) ifTrue: [actualDirection rotarDerecha].
+		i := i +1.
+	].
+
+	actualPosition := (actualPosition x + offsetX)@(actualPosition y + offsetY).! !
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:25:37' prior: 50551809!
+command: aStringCommand
+	| i offsetX offsetY |
+	aStringCommand isEmpty ifTrue: [^self].
+	
+	offsetX := 0.
+	offsetY := 0.	
+	i := 1.
+	
+	[i <= aStringCommand size] whileTrue:[
+		((aStringCommand at: 	i) = $f) ifTrue: [offsetX := offsetX + 1].
+		((aStringCommand at: 	i) = $b) ifTrue: [offsetX := offsetX - 1].
+		((aStringCommand at: 	i) = $l) ifTrue: [actualDirection rotarIzquierda].
+		((aStringCommand at: 	i) = $r) ifTrue: [actualDirection rotarDerecha].
+		i := i +1.
+	].
+
+	actualPosition := (actualPosition x + offsetX)@(actualPosition y + offsetY).! !
+
+!testRun: #TestMarsRover #test01RoverSeInicializaCorrectamente stamp: 'LL 10/30/2022 20:26:03'!
+ERROR!
+
+!testRun: #TestMarsRover #test02RoverPuedeAvanzarUnoHaciaAdelante stamp: 'LL 10/30/2022 20:26:03'!
+PASSED!
+
+!testRun: #TestMarsRover #test03RoverNoHaceNadaConUnComandoVacio stamp: 'LL 10/30/2022 20:26:03'!
+ERROR!
+
+!testRun: #TestMarsRover #test04RoverNoCambiaSuPosicionSiAvanzaYRetrocede stamp: 'LL 10/30/2022 20:26:03'!
+ERROR!
+
+!testRun: #TestMarsRover #test05RoverPuedeCambiarDeDireccion stamp: 'LL 10/30/2022 20:26:03'!
+ERROR!
+
+!testRun: #TestMarsRover #test01RoverSeInicializaCorrectamente stamp: 'LL 10/30/2022 20:26:07'!
+ERROR!
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:26:35' prior: 50551783!
+direction
+	^actualDirection class simbolo.! !
+
+!testRun: #TestMarsRover #test01RoverSeInicializaCorrectamente stamp: 'LL 10/30/2022 20:26:37'!
+PASSED!
+
+!testRun: #TestMarsRover #test02RoverPuedeAvanzarUnoHaciaAdelante stamp: 'LL 10/30/2022 20:26:37'!
+PASSED!
+
+!testRun: #TestMarsRover #test03RoverNoHaceNadaConUnComandoVacio stamp: 'LL 10/30/2022 20:26:37'!
+PASSED!
+
+!testRun: #TestMarsRover #test04RoverNoCambiaSuPosicionSiAvanzaYRetrocede stamp: 'LL 10/30/2022 20:26:37'!
+PASSED!
+
+!testRun: #TestMarsRover #test05RoverPuedeCambiarDeDireccion stamp: 'LL 10/30/2022 20:26:37'!
+FAILURE!
+
+!testRun: #TestMarsRover #test05RoverPuedeCambiarDeDireccion stamp: 'LL 10/30/2022 20:26:37'!
+FAILURE!
+
+!testRun: #TestMarsRover #test01RoverSeInicializaCorrectamente stamp: 'LL 10/30/2022 20:26:43'!
+PASSED!
+
+!testRun: #TestMarsRover #test02RoverPuedeAvanzarUnoHaciaAdelante stamp: 'LL 10/30/2022 20:26:45'!
+PASSED!
+
+!testRun: #TestMarsRover #test03RoverNoHaceNadaConUnComandoVacio stamp: 'LL 10/30/2022 20:26:46'!
+PASSED!
+
+!testRun: #TestMarsRover #test04RoverNoCambiaSuPosicionSiAvanzaYRetrocede stamp: 'LL 10/30/2022 20:26:47'!
+PASSED!
+
+!testRun: #TestMarsRover #test05RoverPuedeCambiarDeDireccion stamp: 'LL 10/30/2022 20:26:48'!
+FAILURE!
+
+!testRun: #TestMarsRover #test05RoverPuedeCambiarDeDireccion stamp: 'LL 10/30/2022 20:26:48'!
+FAILURE!
+!TestMarsRover methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:27:20' prior: 50551416!
+test05RoverPuedeCambiarDeDireccion
+	| robot |
+	robot := MarsRover InitializeInPosition: 0 andY: 0 pointingTo: #N.
+	
+	robot command: 'l'.
+
+	self assert: (robot direction = #E).! !
+
+!testRun: #TestMarsRover #test01RoverSeInicializaCorrectamente stamp: 'LL 10/30/2022 20:27:22'!
+PASSED!
+
+!testRun: #TestMarsRover #test02RoverPuedeAvanzarUnoHaciaAdelante stamp: 'LL 10/30/2022 20:27:22'!
+PASSED!
+
+!testRun: #TestMarsRover #test03RoverNoHaceNadaConUnComandoVacio stamp: 'LL 10/30/2022 20:27:22'!
+PASSED!
+
+!testRun: #TestMarsRover #test04RoverNoCambiaSuPosicionSiAvanzaYRetrocede stamp: 'LL 10/30/2022 20:27:22'!
+PASSED!
+
+!testRun: #TestMarsRover #test05RoverPuedeCambiarDeDireccion stamp: 'LL 10/30/2022 20:27:22'!
+FAILURE!
+
+!testRun: #TestMarsRover #test05RoverPuedeCambiarDeDireccion stamp: 'LL 10/30/2022 20:27:22'!
+FAILURE!
+!TestMarsRover methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:27:34' prior: 50551916!
+test05RoverPuedeCambiarDeDireccion
+	| robot |
+	robot := MarsRover InitializeInPosition: 0 andY: 0 pointingTo: #N.
+	
+	robot command: 'l'.
+
+	self assert: (robot direction = #O).! !
+!Norte methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:27:53' prior: 50551605 overrides: 50551638!
+rotarIzquierda
+	^Oeste new.! !
+!Norte methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:27:59' prior: 50551623 overrides: 50551642!
+rotarDerecha
+	^Este new.! !
+!Sur methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:28:12' prior: 50551635 overrides: 50551642!
+rotarDerecha
+	^Oeste new.! !
+!Sur methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:28:16' prior: 50551615 overrides: 50551638!
+rotarIzquierda
+	^Este new.! !
+!Oeste methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:28:27' prior: 50551627 overrides: 50551642!
+rotarDerecha
+	^Norte new.! !
+!Oeste methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:28:30' prior: 50551608 overrides: 50551638!
+rotarIzquierda
+	^Sur new.! !
+!Este methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:28:45' prior: 50551602 overrides: 50551638!
+rotarIzquierda
+	^Norte new.! !
+!Este methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:28:52' prior: 50551619 overrides: 50551642!
+rotarDerecha
+	^Sur new.! !
+
+!testRun: #TestMarsRover #test01RoverSeInicializaCorrectamente stamp: 'LL 10/30/2022 20:29:07'!
+PASSED!
+
+!testRun: #TestMarsRover #test02RoverPuedeAvanzarUnoHaciaAdelante stamp: 'LL 10/30/2022 20:29:07'!
+PASSED!
+
+!testRun: #TestMarsRover #test03RoverNoHaceNadaConUnComandoVacio stamp: 'LL 10/30/2022 20:29:07'!
+PASSED!
+
+!testRun: #TestMarsRover #test04RoverNoCambiaSuPosicionSiAvanzaYRetrocede stamp: 'LL 10/30/2022 20:29:07'!
+PASSED!
+
+!testRun: #TestMarsRover #test05RoverPuedeCambiarDeDireccion stamp: 'LL 10/30/2022 20:29:07'!
+FAILURE!
+
+!testRun: #TestMarsRover #test05RoverPuedeCambiarDeDireccion stamp: 'LL 10/30/2022 20:29:07'!
+FAILURE!
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:29:49' prior: 50551830!
+command: aStringCommand
+	| i offsetX offsetY |
+	aStringCommand isEmpty ifTrue: [^self].
+	
+	offsetX := 0.
+	offsetY := 0.	
+	i := 1.
+	
+	[i <= aStringCommand size] whileTrue:[
+		((aStringCommand at: 	i) = $f) ifTrue: [offsetX := offsetX + 1].
+		((aStringCommand at: 	i) = $b) ifTrue: [offsetX := offsetX - 1].
+		((aStringCommand at: 	i) = $l) ifTrue: [actualDirection := actualDirection rotarIzquierda].
+		((aStringCommand at: 	i) = $r) ifTrue: [actualDirection := actualDirection rotarDerecha].
+		i := i +1.
+	].
+
+	actualPosition := (actualPosition x + offsetX)@(actualPosition y + offsetY).! !
+
+!testRun: #TestMarsRover #test01RoverSeInicializaCorrectamente stamp: 'LL 10/30/2022 20:29:51'!
+PASSED!
+
+!testRun: #TestMarsRover #test02RoverPuedeAvanzarUnoHaciaAdelante stamp: 'LL 10/30/2022 20:29:51'!
+PASSED!
+
+!testRun: #TestMarsRover #test03RoverNoHaceNadaConUnComandoVacio stamp: 'LL 10/30/2022 20:29:51'!
+PASSED!
+
+!testRun: #TestMarsRover #test04RoverNoCambiaSuPosicionSiAvanzaYRetrocede stamp: 'LL 10/30/2022 20:29:51'!
+PASSED!
+
+!testRun: #TestMarsRover #test05RoverPuedeCambiarDeDireccion stamp: 'LL 10/30/2022 20:29:51'!
+PASSED!
+!TestMarsRover methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:30:44'!
+test05RoverPuedeCambiarDeDireccionYAvanzar
+	| robot |
+	robot := MarsRover InitializeInPosition: 0 andY: 0 pointingTo: #N.
+	
+	robot command: 'lff'.
+
+	self assert: (robot direction = #O).
+	self assert: (robot position = (-2@0)).! !
+!TestMarsRover methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:30:48'!
+test06RoverPuedeCambiarDeDireccionYAvanzar
+	| robot |
+	robot := MarsRover InitializeInPosition: 0 andY: 0 pointingTo: #N.
+	
+	robot command: 'lff'.
+
+	self assert: (robot direction = #O).
+	self assert: (robot position = (-2@0)).! !
+
+!methodRemoval: TestMarsRover #test05RoverPuedeCambiarDeDireccionYAvanzar stamp: 'LL 10/30/2022 20:30:49'!
+test05RoverPuedeCambiarDeDireccionYAvanzar
+	| robot |
+	robot := MarsRover InitializeInPosition: 0 andY: 0 pointingTo: #N.
+	
+	robot command: 'lff'.
+
+	self assert: (robot direction = #O).
+	self assert: (robot position = (-2@0)).!
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:32:53' prior: 50552014!
+command: aStringCommand
+	| i |
+	aStringCommand isEmpty ifTrue: [^self].
+	i := 1.
+	[i <= aStringCommand size] whileTrue:[
+		((aStringCommand at: 	i) = $f) ifTrue: [actualPosition := actualDirection avanzar].
+		((aStringCommand at: 	i) = $b) ifTrue: [actualPosition := actualDirection retroceder].
+		((aStringCommand at: 	i) = $l) ifTrue: [actualDirection := actualDirection rotarIzquierda].
+		((aStringCommand at: 	i) = $r) ifTrue: [actualDirection := actualDirection rotarDerecha].
+		i := i +1.
+	].
+! !
+!Orientacion methodsFor: 'nil' stamp: 'LL 10/30/2022 20:33:05'!
+avanzar
+	self subclassResponsibility ! !
+!Orientacion methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:33:09'!
+retroceder
+	self subclassResponsibility ! !
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:33:33' prior: 50552083!
+command: aStringCommand
+	| i |
+	aStringCommand isEmpty ifTrue: [^self].
+	i := 1.
+	[i <= aStringCommand size] whileTrue:[
+		((aStringCommand at: 	i) = $f) ifTrue: [actualPosition := actualDirection avanzar: actualPosition ].
+		((aStringCommand at: 	i) = $b) ifTrue: [actualPosition := actualDirection retroceder: actualPosition ].
+		((aStringCommand at: 	i) = $l) ifTrue: [actualDirection := actualDirection rotarIzquierda].
+		((aStringCommand at: 	i) = $r) ifTrue: [actualDirection := actualDirection rotarDerecha].
+		i := i +1.
+	].
+! !
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:33:37' prior: 50552110!
+command: aStringCommand
+	| i |
+	aStringCommand isEmpty ifTrue: [^self].
+	i := 1.
+	[i <= aStringCommand size] whileTrue:[
+		((aStringCommand at: 	i) = $f) ifTrue: [actualPosition := actualDirection avanzar: actualPosition].
+		((aStringCommand at: 	i) = $b) ifTrue: [actualPosition := actualDirection retroceder: actualPosition].
+		((aStringCommand at: 	i) = $l) ifTrue: [actualDirection := actualDirection rotarIzquierda].
+		((aStringCommand at: 	i) = $r) ifTrue: [actualDirection := actualDirection rotarDerecha].
+		i := i +1.
+	].
+! !
+!Orientacion methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:33:52'!
+avanzar: aPosition
+	self subclassResponsibility ! !
+
+!methodRemoval: Orientacion #avanzar stamp: 'LL 10/30/2022 20:33:54'!
+avanzar
+	self subclassResponsibility !
+!Orientacion methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:34:01'!
+retroceder: aPosition
+	self subclassResponsibility ! !
+
+0@123 + 1@1!
+
+(0@123) + (1@1)!
+
+!methodRemoval: Orientacion #avanzar: stamp: 'LL 10/30/2022 20:34:44'!
+avanzar: aPosition
+	self subclassResponsibility !
+
+!methodRemoval: Orientacion #retroceder: stamp: 'LL 10/30/2022 20:34:45'!
+retroceder: aPosition
+	self subclassResponsibility !
+!Orientacion methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:34:51'!
+avanzar
+	self subclassResponsibility ! !
+!Este methodsFor: 'nil' stamp: 'LL 10/30/2022 20:35:05' overrides: 50552172!
+avanzar
+	^1@0! !
+!Este methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:35:11' overrides: 50552105!
+retroceder
+	^-1@0! !
+!Norte methodsFor: 'nil' stamp: 'LL 10/30/2022 20:35:33' overrides: 50552105!
+retroceder
+	^0@-1! !
+!Norte methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:35:38' overrides: 50552172!
+avanzar
+	^0@1! !
+!Sur methodsFor: 'nil' stamp: 'LL 10/30/2022 20:35:52' overrides: 50552105!
+retroceder
+	^0@1! !
+!Sur methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:35:59' overrides: 50552172!
+avanzar
+	^0@-1! !
+!Oeste methodsFor: 'nil' stamp: 'LL 10/30/2022 20:36:10' overrides: 50552105!
+retroceder
+	^1@0! !
+!Oeste methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:36:16' overrides: 50552172!
+avanzar
+	^-1@0! !
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:36:47' prior: 50552130!
+command: aStringCommand
+	| i |
+	aStringCommand isEmpty ifTrue: [^self].
+	i := 1.
+	[i <= aStringCommand size] whileTrue:[
+		((aStringCommand at: 	i) = $f) ifTrue: [actualPosition := actualDirection + actualDirection avanzar].
+		((aStringCommand at: 	i) = $b) ifTrue: [actualPosition := actualDirection + actualDirection retroceder].
+		((aStringCommand at: 	i) = $l) ifTrue: [actualDirection := actualDirection rotarIzquierda].
+		((aStringCommand at: 	i) = $r) ifTrue: [actualDirection := actualDirection rotarDerecha].
+		i := i +1.
+	].
+! !
+
+!testRun: #TestMarsRover #test01RoverSeInicializaCorrectamente stamp: 'LL 10/30/2022 20:36:48'!
+PASSED!
+
+!testRun: #TestMarsRover #test02RoverPuedeAvanzarUnoHaciaAdelante stamp: 'LL 10/30/2022 20:36:48'!
+ERROR!
+
+!testRun: #TestMarsRover #test03RoverNoHaceNadaConUnComandoVacio stamp: 'LL 10/30/2022 20:36:48'!
+PASSED!
+
+!testRun: #TestMarsRover #test04RoverNoCambiaSuPosicionSiAvanzaYRetrocede stamp: 'LL 10/30/2022 20:36:48'!
+ERROR!
+
+!testRun: #TestMarsRover #test05RoverPuedeCambiarDeDireccion stamp: 'LL 10/30/2022 20:36:48'!
+PASSED!
+
+!testRun: #TestMarsRover #test06RoverPuedeCambiarDeDireccionYAvanzar stamp: 'LL 10/30/2022 20:36:48'!
+ERROR!
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:37:02' prior: 50552206!
+command: aStringCommand
+	| i |
+	aStringCommand isEmpty ifTrue: [^self].
+	i := 1.
+	[i <= aStringCommand size] whileTrue:[
+		((aStringCommand at: 	i) = $f) ifTrue: [actualPosition := actualPosition + actualDirection avanzar].
+		((aStringCommand at: 	i) = $b) ifTrue: [actualPosition := actualPosition + actualDirection retroceder].
+		((aStringCommand at: 	i) = $l) ifTrue: [actualDirection := actualDirection rotarIzquierda].
+		((aStringCommand at: 	i) = $r) ifTrue: [actualDirection := actualDirection rotarDerecha].
+		i := i +1.
+	].
+! !
+
+!testRun: #TestMarsRover #test01RoverSeInicializaCorrectamente stamp: 'LL 10/30/2022 20:37:03'!
+PASSED!
+
+!testRun: #TestMarsRover #test02RoverPuedeAvanzarUnoHaciaAdelante stamp: 'LL 10/30/2022 20:37:03'!
+FAILURE!
+
+!testRun: #TestMarsRover #test03RoverNoHaceNadaConUnComandoVacio stamp: 'LL 10/30/2022 20:37:03'!
+PASSED!
+
+!testRun: #TestMarsRover #test04RoverNoCambiaSuPosicionSiAvanzaYRetrocede stamp: 'LL 10/30/2022 20:37:03'!
+PASSED!
+
+!testRun: #TestMarsRover #test05RoverPuedeCambiarDeDireccion stamp: 'LL 10/30/2022 20:37:03'!
+PASSED!
+
+!testRun: #TestMarsRover #test06RoverPuedeCambiarDeDireccionYAvanzar stamp: 'LL 10/30/2022 20:37:03'!
+PASSED!
+
+!testRun: #TestMarsRover #test02RoverPuedeAvanzarUnoHaciaAdelante stamp: 'LL 10/30/2022 20:37:03'!
+FAILURE!
+
+!testRun: #TestMarsRover #test01RoverSeInicializaCorrectamente stamp: 'LL 10/30/2022 20:37:09'!
+PASSED!
+
+!testRun: #TestMarsRover #test02RoverPuedeAvanzarUnoHaciaAdelante stamp: 'LL 10/30/2022 20:37:10'!
+FAILURE!
+
+!testRun: #TestMarsRover #test02RoverPuedeAvanzarUnoHaciaAdelante stamp: 'LL 10/30/2022 20:37:10'!
+FAILURE!
+!TestMarsRover methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:37:22' prior: 50551298!
+test02RoverPuedeAvanzarUnoHaciaAdelante
+	| robot |
+	robot := MarsRover InitializeInPosition: 0 andY: 0 pointingTo: #N.
+	
+	robot command: 'f'.
+
+	self assert: (robot position = (0@1)).! !
+
+!testRun: #TestMarsRover #test02RoverPuedeAvanzarUnoHaciaAdelante stamp: 'LL 10/30/2022 20:37:25'!
+PASSED!
+
+!testRun: #TestMarsRover #test03RoverNoHaceNadaConUnComandoVacio stamp: 'LL 10/30/2022 20:37:26'!
+PASSED!
+
+!testRun: #TestMarsRover #test04RoverNoCambiaSuPosicionSiAvanzaYRetrocede stamp: 'LL 10/30/2022 20:37:27'!
+PASSED!
+
+!testRun: #TestMarsRover #test05RoverPuedeCambiarDeDireccion stamp: 'LL 10/30/2022 20:37:28'!
+PASSED!
+
+!testRun: #TestMarsRover #test06RoverPuedeCambiarDeDireccionYAvanzar stamp: 'LL 10/30/2022 20:37:29'!
+PASSED!
+
+!testRun: #TestMarsRover #test01RoverSeInicializaCorrectamente stamp: 'LL 10/30/2022 20:37:30'!
+PASSED!
+
+!testRun: #TestMarsRover #test02RoverPuedeAvanzarUnoHaciaAdelante stamp: 'LL 10/30/2022 20:37:30'!
+PASSED!
+
+!testRun: #TestMarsRover #test03RoverNoHaceNadaConUnComandoVacio stamp: 'LL 10/30/2022 20:37:30'!
+PASSED!
+
+!testRun: #TestMarsRover #test04RoverNoCambiaSuPosicionSiAvanzaYRetrocede stamp: 'LL 10/30/2022 20:37:30'!
+PASSED!
+
+!testRun: #TestMarsRover #test05RoverPuedeCambiarDeDireccion stamp: 'LL 10/30/2022 20:37:30'!
+PASSED!
+
+!testRun: #TestMarsRover #test06RoverPuedeCambiarDeDireccionYAvanzar stamp: 'LL 10/30/2022 20:37:30'!
+PASSED!
+!TestMarsRover methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:38:06' prior: 50552062!
+test06RoverPuedeCambiarDeDireccionYAvanzar
+	| robot |
+	robot := MarsRover InitializeInPosition: 0 andY: 0 pointingTo: #N.
+	
+	robot command: 'juanROMANRIQUELME'.
+
+	self assert: (robot direction = #O).
+	self assert: (robot position = (-2@0)).! !
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:40:11' prior: 50552246!
+command: aStringCommand
+	| i |
+	aStringCommand isEmpty ifTrue: [^self].
+	i := 1.
+	[i <= aStringCommand size] whileTrue:[
+		((aStringCommand at: 	i) = $f)  ifTrue: [actualPosition := actualPosition + actualDirection avanzar ].
+		((aStringCommand at: 	i) = $b) ifTrue: [actualPosition := actualPosition + actualDirection retroceder].
+		((aStringCommand at: 	i) = $l)  ifTrue: [actualDirection := actualDirection rotarIzquierda].
+		((aStringCommand at: 	i) = $r) ifTrue: [actualDirection := actualDirection rotarDerecha].
+		
+		i := i +1.
+	].
+
+
+! !
+
+'a' switch!
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:41:28' prior: 50552358!
+command: aStringCommand
+	| i |
+	aStringCommand isEmpty ifTrue: [^self].
+	i := 1.
+	[i <= aStringCommand size] whileTrue:[
+		((aStringCommand at: 	i) = $f)  ifTrue: [actualPosition := actualPosition + actualDirection avanzar ].
+		((aStringCommand at: 	i) = $b) ifTrue: [actualPosition := actualPosition + actualDirection retroceder].
+		((aStringCommand at: 	i) = $l)  ifTrue: [actualDirection := actualDirection rotarIzquierda].
+		((aStringCommand at: 	i) = $r) ifTrue: [actualDirection := actualDirection rotarDerecha].
+		i := i +1.
+	].
+
+
+! !
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:42:28' prior: 50552379!
+command: aStringCommand
+	| i aux |
+	aStringCommand isEmpty ifTrue: [^self].
+	i := 1.
+	[i <= aStringCommand size] whileTrue:[
+		aux := false.
+		((aStringCommand at: 	i) = $f)  ifTrue: [actualPosition := actualPosition + actualDirection avanzar. aux := true].
+		((aStringCommand at: 	i) = $b) ifTrue: [actualPosition := actualPosition + actualDirection retroceder.  aux := true].
+		((aStringCommand at: 	i) = $l)  ifTrue: [actualDirection := actualDirection rotarIzquierda.  aux := true].
+		((aStringCommand at: 	i) = $r) ifTrue: [actualDirection := actualDirection rotarDerecha.  aux := true].
+		i := i +1.
+	].
+
+
+! !
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:42:51' prior: 50552399!
+command: aStringCommand
+	| i aux |
+	aStringCommand isEmpty ifTrue: [^self].
+	i := 1.
+	[i <= aStringCommand size] whileTrue:[
+		aux := false.
+		((aStringCommand at: 	i) = $f)  ifTrue: [actualPosition := actualPosition + actualDirection avanzar. aux := true].
+		((aStringCommand at: 	i) = $b) ifTrue: [actualPosition := actualPosition + actualDirection retroceder.  aux := true].
+		((aStringCommand at: 	i) = $l)  ifTrue: [actualDirection := actualDirection rotarIzquierda.  aux := true].
+		((aStringCommand at: 	i) = $r) ifTrue: [actualDirection := actualDirection rotarDerecha.  aux := true].
+		
+		aux ifFalse: [^self].
+		i := i +1.
+	].
+
+
+! !
+!TestMarsRover methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:45:27'!
+test07RoverPuedeCambiarDeDireccionYAvanzarMultiplesVeces
+	| robot |
+	robot := MarsRover InitializeInPosition: 0 andY: 0 pointingTo: #N.
+	
+	robot command: 'flfrfflfffrrf'.
+
+	self assert: (robot direction = #O).
+	self assert: (robot position = (-3@3)).! !
+!TestMarsRover methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:45:31' prior: 50552445!
+test07RoverPuedeCambiarDeDireccionYAvanzarMultiplesVeces
+	| robot |
+	robot := MarsRover InitializeInPosition: 0 andY: 0 pointingTo: #N.
+	
+	robot command: 'flfrfflfffrrf'.
+
+	self assert: (robot direction = #E).
+	self assert: (robot position = (-3@3)).! !
+!TestMarsRover methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:46:01' prior: 50552456!
+test07RoverPuedeCambiarDeDireccionYAvanzarMultiplesVeces
+	| robot |
+	robot := MarsRover InitializeInPosition: 0 andY: 0 pointingTo: #N.
+	
+	robot command: 'flfrfflfffrrfb'.
+
+	self assert: (robot direction = #E).
+	self assert: (robot position = (-4@3)).! !
+
+!testRun: #TestMarsRover #test01RoverSeInicializaCorrectamente stamp: 'LL 10/30/2022 20:46:05'!
+PASSED!
+
+!testRun: #TestMarsRover #test02RoverPuedeAvanzarUnoHaciaAdelante stamp: 'LL 10/30/2022 20:46:05'!
+PASSED!
+
+!testRun: #TestMarsRover #test03RoverNoHaceNadaConUnComandoVacio stamp: 'LL 10/30/2022 20:46:05'!
+PASSED!
+
+!testRun: #TestMarsRover #test04RoverNoCambiaSuPosicionSiAvanzaYRetrocede stamp: 'LL 10/30/2022 20:46:05'!
+PASSED!
+
+!testRun: #TestMarsRover #test05RoverPuedeCambiarDeDireccion stamp: 'LL 10/30/2022 20:46:05'!
+PASSED!
+
+!testRun: #TestMarsRover #test06RoverPuedeCambiarDeDireccionYAvanzar stamp: 'LL 10/30/2022 20:46:05'!
+FAILURE!
+
+!testRun: #TestMarsRover #test07RoverPuedeCambiarDeDireccionYAvanzarMultiplesVeces stamp: 'LL 10/30/2022 20:46:05'!
+PASSED!
+
+!testRun: #TestMarsRover #test06RoverPuedeCambiarDeDireccionYAvanzar stamp: 'LL 10/30/2022 20:46:05'!
+FAILURE!
+
+!testRun: #TestMarsRover #test07RoverPuedeCambiarDeDireccionYAvanzarMultiplesVeces stamp: 'LL 10/30/2022 20:46:11'!
+PASSED!
+
+!testRun: #TestMarsRover #test07RoverPuedeCambiarDeDireccionYAvanzarMultiplesVeces stamp: 'LL 10/30/2022 20:46:13'!
+PASSED!
+
+!testRun: #TestMarsRover #test07RoverPuedeCambiarDeDireccionYAvanzarMultiplesVeces stamp: 'LL 10/30/2022 20:46:14'!
+PASSED!
+
+!testRun: #TestMarsRover #test06RoverPuedeCambiarDeDireccionYAvanzar stamp: 'LL 10/30/2022 20:46:15'!
+FAILURE!
+
+!testRun: #TestMarsRover #test06RoverPuedeCambiarDeDireccionYAvanzar stamp: 'LL 10/30/2022 20:46:15'!
+FAILURE!
+!TestMarsRover methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:46:40' prior: 50552347!
+test06RoverPuedeCambiarDeDireccionYAvanzar
+	| robot |
+	robot := MarsRover InitializeInPosition: 0 andY: 0 pointingTo: #N.
+	
+	robot command: 'ffffffffffrrM'.
+
+	self assert: (robot direction = #S).
+	self assert: (robot position = (0@10)).! !
+!TestMarsRover methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:46:52' prior: 50552525!
+test06RoverPuedeCambiarDeDireccionYAvanzar
+	| robot |
+	robot := MarsRover InitializeInPosition: 0 andY: 0 pointingTo: #N.
+	
+	robot command: 'ffffffffffrrMfffffffffrrrrfffrfrfrfrfrfrfllllllbbbbbbbrl'.
+
+	self assert: (robot direction = #S).
+	self assert: (robot position = (0@10)).! !
+!TestMarsRover methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:47:34'!
+test08RoverDejaDeEjecutarLosComandosCuandoEncuentraUnoInvalido
+	| robot |
+	robot := MarsRover InitializeInPosition: 0 andY: 0 pointingTo: #N.
+	
+	robot command: 'ffffffffffrrMfffffffffrrrrfffrfrfrfrfrfrfllllllbbbbbbbrl'.
+
+	self assert: (robot direction = #S).
+	self assert: (robot position = (0@10)).! !
+
+!testRun: #TestMarsRover #test08RoverDejaDeEjecutarLosComandosCuandoEncuentraUnoInvalido stamp: 'LL 10/30/2022 20:47:41'!
+PASSED!
+
+!testRun: #TestMarsRover #test01RoverSeInicializaCorrectamente stamp: 'LL 10/30/2022 20:49:04'!
+PASSED!
+
+!testRun: #TestMarsRover #test02RoverPuedeAvanzarUnoHaciaAdelante stamp: 'LL 10/30/2022 20:49:04'!
+PASSED!
+
+!testRun: #TestMarsRover #test03RoverNoHaceNadaConUnComandoVacio stamp: 'LL 10/30/2022 20:49:04'!
+PASSED!
+
+!testRun: #TestMarsRover #test04RoverNoCambiaSuPosicionSiAvanzaYRetrocede stamp: 'LL 10/30/2022 20:49:04'!
+PASSED!
+
+!testRun: #TestMarsRover #test05RoverPuedeCambiarDeDireccion stamp: 'LL 10/30/2022 20:49:04'!
+PASSED!
+
+!testRun: #TestMarsRover #test06RoverPuedeCambiarDeDireccionYAvanzar stamp: 'LL 10/30/2022 20:49:04'!
+PASSED!
+
+!testRun: #TestMarsRover #test07RoverPuedeCambiarDeDireccionYAvanzarMultiplesVeces stamp: 'LL 10/30/2022 20:49:04'!
+PASSED!
+
+!testRun: #TestMarsRover #test08RoverDejaDeEjecutarLosComandosCuandoEncuentraUnoInvalido stamp: 'LL 10/30/2022 20:49:04'!
+PASSED!
+!TestMarsRover methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:51:29'!
+test08RoverHaceUnGiroCompleto
+	| robot |
+	robot := MarsRover InitializeInPosition: 0 andY: 0 pointingTo: #N.
+	
+	robot command: 'llll'.
+
+	self assert: (robot direction = #N).
+	self assert: (robot position = (0@0)).! !
+
+!testRun: #TestMarsRover #test01RoverSeInicializaCorrectamente stamp: 'LL 10/30/2022 20:51:30'!
+PASSED!
+
+!testRun: #TestMarsRover #test02RoverPuedeAvanzarUnoHaciaAdelante stamp: 'LL 10/30/2022 20:51:30'!
+PASSED!
+
+!testRun: #TestMarsRover #test03RoverNoHaceNadaConUnComandoVacio stamp: 'LL 10/30/2022 20:51:30'!
+PASSED!
+
+!testRun: #TestMarsRover #test04RoverNoCambiaSuPosicionSiAvanzaYRetrocede stamp: 'LL 10/30/2022 20:51:30'!
+PASSED!
+
+!testRun: #TestMarsRover #test05RoverPuedeCambiarDeDireccion stamp: 'LL 10/30/2022 20:51:30'!
+PASSED!
+
+!testRun: #TestMarsRover #test06RoverPuedeCambiarDeDireccionYAvanzar stamp: 'LL 10/30/2022 20:51:30'!
+PASSED!
+
+!testRun: #TestMarsRover #test07RoverPuedeCambiarDeDireccionYAvanzarMultiplesVeces stamp: 'LL 10/30/2022 20:51:30'!
+PASSED!
+
+!testRun: #TestMarsRover #test08RoverDejaDeEjecutarLosComandosCuandoEncuentraUnoInvalido stamp: 'LL 10/30/2022 20:51:30'!
+PASSED!
+
+!testRun: #TestMarsRover #test08RoverHaceUnGiroCompleto stamp: 'LL 10/30/2022 20:51:30'!
+PASSED!
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:54:10' prior: 50552422!
+command: aStringCommand
+	| i comandosValidos |
+	aStringCommand isEmpty ifTrue: [^self].
+	i := 1.
+	comandosValidos := 'fblr'.
+ 	
+	[i <= aStringCommand size] whileTrue:[
+		(comandosValidos includes: (aStringCommand at: i)) ifFalse: [^self].
+		((aStringCommand at: 	i) = $f)  ifTrue: [actualPosition := actualPosition + actualDirection avanzar].
+		((aStringCommand at: 	i) = $b) ifTrue: [actualPosition := actualPosition + actualDirection retroceder].
+		((aStringCommand at: 	i) = $l)  ifTrue: [actualDirection := actualDirection rotarIzquierda].
+		((aStringCommand at: 	i) = $r) ifTrue: [actualDirection := actualDirection rotarDerecha].
+		i := i +1.
+	].
+
+
+! !
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:54:32' prior: 50552635!
+command: aStringCommand
+	| i comandosValidos |
+	aStringCommand isEmpty ifTrue: [^self].
+	i := 1.
+	comandosValidos := 'fblr'.
+ 	
+	[i <= aStringCommand size] whileTrue:[
+		('fblr' includes: (aStringCommand at: i)) ifFalse: [^self].
+		((aStringCommand at: 	i) = $f)  ifTrue: [actualPosition := actualPosition + actualDirection avanzar].
+		((aStringCommand at: 	i) = $b) ifTrue: [actualPosition := actualPosition + actualDirection retroceder].
+		((aStringCommand at: 	i) = $l)  ifTrue: [actualDirection := actualDirection rotarIzquierda].
+		((aStringCommand at: 	i) = $r) ifTrue: [actualDirection := actualDirection rotarDerecha].
+		i := i +1.
+	].
+
+
+! !
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:54:38' prior: 50552659!
+command: aStringCommand
+	| i |
+	aStringCommand isEmpty ifTrue: [^self].
+	i := 1.
+ 	
+	[i <= aStringCommand size] whileTrue:[
+		('fblr' includes: (aStringCommand at: i)) ifFalse: [^self].
+		((aStringCommand at: 	i) = $f)  ifTrue: [actualPosition := actualPosition + actualDirection avanzar].
+		((aStringCommand at: 	i) = $b) ifTrue: [actualPosition := actualPosition + actualDirection retroceder].
+		((aStringCommand at: 	i) = $l)  ifTrue: [actualDirection := actualDirection rotarIzquierda].
+		((aStringCommand at: 	i) = $r) ifTrue: [actualDirection := actualDirection rotarDerecha].
+		i := i +1.
+	].
+
+
+! !
+
+a := '+ 1'!
+
+1 messageWithArgument: a!
+
+1 message: a!
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:58:15' prior: 50552683!
+command: aStringCommand
+	| i |
+	aStringCommand isEmpty ifTrue: [^self].
+	i := 1.
+
+	[i <= aStringCommand size] whileTrue:[
+		('fblr' includes: (aStringCommand at: i)) ifFalse: [^self].
+		((aStringCommand at: 	i) = $f)  ifTrue: [actualPosition := actualPosition + actualDirection avanzar].
+		((aStringCommand at: 	i) = $b) ifTrue: [actualPosition := actualPosition + actualDirection retroceder].
+		((aStringCommand at: 	i) = $l)  ifTrue: [actualDirection := actualDirection rotarIzquierda].
+		((aStringCommand at: 	i) = $r) ifTrue: [actualDirection := actualDirection rotarDerecha].
+		i := i +1.
+	].
+
+
+! !
+
+!testRun: #TestMarsRover #test01RoverSeInicializaCorrectamente stamp: 'LL 10/30/2022 20:58:23'!
+PASSED!
+
+!testRun: #TestMarsRover #test02RoverPuedeAvanzarUnoHaciaAdelante stamp: 'LL 10/30/2022 20:58:23'!
+PASSED!
+
+!testRun: #TestMarsRover #test03RoverNoHaceNadaConUnComandoVacio stamp: 'LL 10/30/2022 20:58:23'!
+PASSED!
+
+!testRun: #TestMarsRover #test04RoverNoCambiaSuPosicionSiAvanzaYRetrocede stamp: 'LL 10/30/2022 20:58:23'!
+PASSED!
+
+!testRun: #TestMarsRover #test05RoverPuedeCambiarDeDireccion stamp: 'LL 10/30/2022 20:58:23'!
+PASSED!
+
+!testRun: #TestMarsRover #test06RoverPuedeCambiarDeDireccionYAvanzar stamp: 'LL 10/30/2022 20:58:23'!
+PASSED!
+
+!testRun: #TestMarsRover #test07RoverPuedeCambiarDeDireccionYAvanzarMultiplesVeces stamp: 'LL 10/30/2022 20:58:23'!
+PASSED!
+
+!testRun: #TestMarsRover #test08RoverDejaDeEjecutarLosComandosCuandoEncuentraUnoInvalido stamp: 'LL 10/30/2022 20:58:23'!
+PASSED!
+
+!testRun: #TestMarsRover #test08RoverHaceUnGiroCompleto stamp: 'LL 10/30/2022 20:58:23'!
+PASSED!
+
+----QUIT----(30 October 2022 20:58:35) CuisUniversity-5466.image priorSource: 7018348!
