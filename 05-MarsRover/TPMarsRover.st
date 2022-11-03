@@ -1,95 +1,83 @@
-!classDefinition: #TestMarsRover category: 'TPMarsRover'!
-TestCase subclass: #TestMarsRover
-	instanceVariableNames: ''
+!classDefinition: #MarsRoverTest category: 'TPMarsRover'!
+TestCase subclass: #MarsRoverTest
+	instanceVariableNames: 'explorador'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'TPMarsRover'!
 
-!TestMarsRover methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 19:37:11'!
+!MarsRoverTest methodsFor: 'tests' stamp: 'ALR 10/31/2022 17:32:10'!
 test01RoverSeInicializaCorrectamente
-	| robot |
-	robot := MarsRover InitializeInPosition: 0 andY: 0 pointingTo: #N.
-	
-	self assert: (robot direction = #N).
-	self assert: (robot position = (0@0)).! !
+	self assertQueElMarsRover: explorador tieneSuPosicionEn: (0@0) yEstaMirandoHacia: #N.! !
 
-!TestMarsRover methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:37:22'!
+!MarsRoverTest methodsFor: 'tests' stamp: 'ALR 10/31/2022 19:55:37'!
 test02RoverPuedeAvanzarUnoHaciaAdelante
-	| robot |
-	robot := MarsRover InitializeInPosition: 0 andY: 0 pointingTo: #N.
-	
-	robot command: 'f'.
+	explorador moveWithStringCommand: 'f'.
+	self assertQueElMarsRover: explorador tieneSuPosicionEn: (0@1) yEstaMirandoHacia: #N.! !
 
-	self assert: (robot position = (0@1)).! !
-
-!TestMarsRover methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 19:38:01'!
+!MarsRoverTest methodsFor: 'tests' stamp: 'ALR 10/31/2022 19:55:37'!
 test03RoverNoHaceNadaConUnComandoVacio
-	| robot |
-	robot := MarsRover InitializeInPosition: 0 andY: 0 pointingTo: #N.
-	
-	robot command: ''.
+	explorador moveWithStringCommand: ''.
+	self assertQueElMarsRover: explorador tieneSuPosicionEn: (0@0) yEstaMirandoHacia: #N.! !
 
-	self assert: (robot direction = #N).
-	self assert: (robot position = (0@0)).! !
-
-!TestMarsRover methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 19:39:41'!
+!MarsRoverTest methodsFor: 'tests' stamp: 'ALR 10/31/2022 19:55:37'!
 test04RoverNoCambiaSuPosicionSiAvanzaYRetrocede
-	| robot |
-	robot := MarsRover InitializeInPosition: 0 andY: 0 pointingTo: #N.
-	
-	robot command: 'fb'.
+	explorador moveWithStringCommand: 'fb'.
+	self assertQueElMarsRover: explorador tieneSuPosicionEn: (0@0) yEstaMirandoHacia: #N.! !
 
-	self assert: (robot direction = #N).
-	self assert: (robot position = (0@0)).! !
-
-!TestMarsRover methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:27:34'!
+!MarsRoverTest methodsFor: 'tests' stamp: 'ALR 10/31/2022 19:55:37'!
 test05RoverPuedeCambiarDeDireccion
-	| robot |
-	robot := MarsRover InitializeInPosition: 0 andY: 0 pointingTo: #N.
-	
-	robot command: 'l'.
+	explorador moveWithStringCommand: 'l'.
+	self assertQueElMarsRover: explorador tieneSuPosicionEn: (0@0) yEstaMirandoHacia: #O.! !
 
-	self assert: (robot direction = #O).! !
+!MarsRoverTest methodsFor: 'tests' stamp: 'ALR 10/31/2022 19:55:37'!
+test06RoverPuedeCambiarDeDireccionYAvanzarMultiplesVeces
+	explorador moveWithStringCommand: 'flfrfflfffrrfb'.
+	self assertQueElMarsRover: explorador tieneSuPosicionEn: (-4@3) yEstaMirandoHacia: #E.! !
 
-!TestMarsRover methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:46:52'!
-test06RoverPuedeCambiarDeDireccionYAvanzar
-	| robot |
-	robot := MarsRover InitializeInPosition: 0 andY: 0 pointingTo: #N.
-	
-	robot command: 'ffffffffffrrMfffffffffrrrrfffrfrfrfrfrfrfllllllbbbbbbbrl'.
+!MarsRoverTest methodsFor: 'tests' stamp: 'ALR 10/31/2022 19:55:37'!
+test07RoverDejaDeEjecutarLosComandosCuandoEncuentraUnoInvalido
+	explorador moveWithStringCommand: 'ffffffffffrrMfffffffffrrrrfffrfrfrfrfrfrfllllllbbbbbbbrl'.
+	self assertQueElMarsRover: explorador tieneSuPosicionEn: (0@10) yEstaMirandoHacia: #S.! !
 
-	self assert: (robot direction = #S).
-	self assert: (robot position = (0@10)).! !
-
-!TestMarsRover methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:46:01'!
-test07RoverPuedeCambiarDeDireccionYAvanzarMultiplesVeces
-	| robot |
-	robot := MarsRover InitializeInPosition: 0 andY: 0 pointingTo: #N.
-	
-	robot command: 'flfrfflfffrrfb'.
-
-	self assert: (robot direction = #E).
-	self assert: (robot position = (-4@3)).! !
-
-!TestMarsRover methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:47:34'!
-test08RoverDejaDeEjecutarLosComandosCuandoEncuentraUnoInvalido
-	| robot |
-	robot := MarsRover InitializeInPosition: 0 andY: 0 pointingTo: #N.
-	
-	robot command: 'ffffffffffrrMfffffffffrrrrfffrfrfrfrfrfrfllllllbbbbbbbrl'.
-
-	self assert: (robot direction = #S).
-	self assert: (robot position = (0@10)).! !
-
-!TestMarsRover methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:51:29'!
+!MarsRoverTest methodsFor: 'tests' stamp: 'ALR 10/31/2022 19:55:37'!
 test08RoverHaceUnGiroCompleto
-	| robot |
-	robot := MarsRover InitializeInPosition: 0 andY: 0 pointingTo: #N.
-	
-	robot command: 'llll'.
+	explorador moveWithStringCommand: 'llll'.
+	self assertQueElMarsRover: explorador tieneSuPosicionEn: (0@0) yEstaMirandoHacia: #N.! !
 
-	self assert: (robot direction = #N).
-	self assert: (robot position = (0@0)).! !
+!MarsRoverTest methodsFor: 'tests' stamp: 'ALR 11/3/2022 15:32:32'!
+test09InicializarRoverConCardinalInvalidoLevantaUnError
+	self
+		should: [ MarsRover deployInPositionX: 0 andY: 0 pointingTo: #F ]
+		raise: Error 
+		withExceptionDo: [ :anError |
+			self assert: MarsRover invalidCardinalDescription equals: anError messageText ]! !
+
+!MarsRoverTest methodsFor: 'tests' stamp: 'ALR 11/3/2022 15:32:32'!
+test10InicializarRoverConXInvalidaLevantaUnError
+	self
+		should: [ MarsRover deployInPositionX: 'cuarenta y ocho' andY: 0 pointingTo: #N ]
+		raise: Error 
+		withExceptionDo: [ :anError |
+			self assert: MarsRover invalidXPositionDescription equals: anError messageText ]! !
+
+!MarsRoverTest methodsFor: 'tests' stamp: 'ALR 11/3/2022 15:32:32'!
+test11InicializarRoverConYInvalidaLevantaUnError
+	self
+		should: [ MarsRover deployInPositionX: 0 andY: 'setenta y cuatro' pointingTo: #N ]
+		raise: Error 
+		withExceptionDo: [ :anError |
+			self assert: MarsRover invalidYPositionDescription equals: anError messageText ]! !
+
+
+!MarsRoverTest methodsFor: 'assertions' stamp: 'ALR 10/31/2022 21:55:04'!
+assertQueElMarsRover: unMarsRover tieneSuPosicionEn: unaPosicionEsperada yEstaMirandoHacia: unPuntoCardinalEsperado
+	self assert: (unMarsRover direction) equals: unPuntoCardinalEsperado.
+	self assert: (unMarsRover position) equals: unaPosicionEsperada.! !
+
+
+!MarsRoverTest methodsFor: 'setUp/tearDown' stamp: 'ALR 11/3/2022 15:32:32'!
+setUp
+	explorador := MarsRover deployInPositionX: 0 andY: 0 pointingTo: #N.! !
 
 
 !classDefinition: #MarsRover category: 'TPMarsRover'!
@@ -99,37 +87,39 @@ Object subclass: #MarsRover
 	poolDictionaries: ''
 	category: 'TPMarsRover'!
 
-!MarsRover methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:58:15'!
-command: aStringCommand
-	| i |
-	aStringCommand isEmpty ifTrue: [^self].
-	i := 1.
+!MarsRover methodsFor: 'accesing' stamp: 'LL 10/30/2022 20:26:35'!
+direction
+	^actualDirection class simbolo.! !
 
-	[i <= aStringCommand size] whileTrue:[
-		('fblr' includes: (aStringCommand at: i)) ifFalse: [^self].
-		((aStringCommand at: 	i) = $f)  ifTrue: [actualPosition := actualPosition + actualDirection avanzar].
-		((aStringCommand at: 	i) = $b) ifTrue: [actualPosition := actualPosition + actualDirection retroceder].
-		((aStringCommand at: 	i) = $l)  ifTrue: [actualDirection := actualDirection rotarIzquierda].
-		((aStringCommand at: 	i) = $r) ifTrue: [actualDirection := actualDirection rotarDerecha].
-		i := i +1.
+!MarsRover methodsFor: 'accesing' stamp: 'LL 10/30/2022 19:29:42'!
+position
+	^actualPosition ! !
+
+
+!MarsRover methodsFor: 'operations' stamp: 'ALR 10/31/2022 19:57:17'!
+moveWithStringCommand: aStringCommand
+	| posicionDelCaracterAEvaluar |
+	aStringCommand isEmpty ifTrue: [^self].
+	posicionDelCaracterAEvaluar := 1.
+
+	[posicionDelCaracterAEvaluar <= aStringCommand size] whileTrue:[
+		('fblr' includes: (aStringCommand at: posicionDelCaracterAEvaluar)) ifFalse: [^self].
+		((aStringCommand at: 	posicionDelCaracterAEvaluar) = $f)  ifTrue: [actualPosition := actualPosition + actualDirection avanzar].
+		((aStringCommand at: 	posicionDelCaracterAEvaluar) = $b) ifTrue: [actualPosition := actualPosition + actualDirection retroceder].
+		((aStringCommand at: 	posicionDelCaracterAEvaluar) = $l)  ifTrue: [actualDirection := actualDirection rotarIzquierda].
+		((aStringCommand at: 	posicionDelCaracterAEvaluar) = $r) ifTrue: [actualDirection := actualDirection rotarDerecha].
+		posicionDelCaracterAEvaluar := posicionDelCaracterAEvaluar + 1.
 	].
 
 
 ! !
 
-!MarsRover methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:26:35'!
-direction
-	^actualDirection class simbolo.! !
 
-!MarsRover methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:22:39'!
-inPosition: aCardinalPoint pointingTo: aDirection
+!MarsRover methodsFor: 'initialization' stamp: 'ALR 10/31/2022 17:50:27'!
+initializeInPosition: aCardinalPoint pointingTo: aDirection
 	
 	actualPosition := aCardinalPoint.
-	actualDirection := Orientacion initializeWithDirection: aDirection.! !
-
-!MarsRover methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 19:29:42'!
-position
-	^actualPosition ! !
+	actualDirection := MarsRoverOrientacion initializeWithDirection: aDirection.! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
@@ -137,183 +127,205 @@ position
 MarsRover class
 	instanceVariableNames: ''!
 
-!MarsRover class methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:18:08'!
-InitializeInPosition: anXPosition andY: aYPosition pointingTo: aCardinal 
-	^self new inPosition: (anXPosition@aYPosition) pointingTo: aCardinal.! !
+!MarsRover class methodsFor: 'instance creation' stamp: 'ALR 11/3/2022 15:32:32'!
+deployInPositionX: anXPosition andY: anYPosition pointingTo: aPotentialCardinal
+	| puntosCardinales |
+	
+	(anXPosition isKindOf: Number) ifFalse: [ self error: self invalidXPositionDescription ].
+	(anYPosition isKindOf: Number) ifFalse: [ self error: self invalidYPositionDescription ].
+	
+	puntosCardinales := #(#N, #O, #S, #E).
+	(puntosCardinales includes: aPotentialCardinal) ifFalse: [ self error: self invalidCardinalDescription ].
+	
+	^self new initializeInPosition: (anXPosition@anYPosition) pointingTo: aPotentialCardinal.! !
+
+
+!MarsRover class methodsFor: 'errors' stamp: 'ALR 10/31/2022 19:22:20'!
+invalidCardinalDescription
+	^'El punto cardinal ingresado no es válido'.! !
+
+!MarsRover class methodsFor: 'errors' stamp: 'ALR 10/31/2022 20:02:16'!
+invalidXPositionDescription
+	^'El punto X ingresado no es válido'.! !
+
+!MarsRover class methodsFor: 'errors' stamp: 'ALR 10/31/2022 20:02:25'!
+invalidYPositionDescription
+	^'El punto Y ingresado no es válido'.! !
 
 
-!classDefinition: #Orientacion category: 'TPMarsRover'!
-Object subclass: #Orientacion
+!classDefinition: #MarsRoverOrientacion category: 'TPMarsRover'!
+Object subclass: #MarsRoverOrientacion
 	instanceVariableNames: ''
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'TPMarsRover'!
 
-!Orientacion methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:34:51'!
+!MarsRoverOrientacion methodsFor: 'orders' stamp: 'LL 10/30/2022 20:34:51'!
 avanzar
 	self subclassResponsibility ! !
 
-!Orientacion methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:33:09'!
+!MarsRoverOrientacion methodsFor: 'orders' stamp: 'LL 10/30/2022 20:33:09'!
 retroceder
 	self subclassResponsibility ! !
 
-!Orientacion methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:17:53'!
+!MarsRoverOrientacion methodsFor: 'orders' stamp: 'LL 10/30/2022 20:17:53'!
 rotarDerecha
 	self subclassResponsibility.! !
 
-!Orientacion methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:17:48'!
+!MarsRoverOrientacion methodsFor: 'orders' stamp: 'LL 10/30/2022 20:17:48'!
 rotarIzquierda
 	self subclassResponsibility.! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
-!classDefinition: 'Orientacion class' category: 'TPMarsRover'!
-Orientacion class
+!classDefinition: 'MarsRoverOrientacion class' category: 'TPMarsRover'!
+MarsRoverOrientacion class
 	instanceVariableNames: ''!
 
-!Orientacion class methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:24:38'!
+!MarsRoverOrientacion class methodsFor: 'accessing' stamp: 'LL 10/30/2022 20:24:32'!
+simbolo 
+	self subclassResponsibility.! !
+
+
+!MarsRoverOrientacion class methodsFor: 'instance creation' stamp: 'LL 10/30/2022 20:24:38'!
 initializeWithDirection: aDireccion
 	| subclase |
 	subclase := self subclasses detect: [:subclass | subclass simbolo = aDireccion ].
 	^subclase new.
 ! !
 
-!Orientacion class methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:24:32'!
-simbolo 
-	self subclassResponsibility.! !
-
 
-!classDefinition: #Este category: 'TPMarsRover'!
-Orientacion subclass: #Este
+!classDefinition: #MarsRoverOrientacionEste category: 'TPMarsRover'!
+MarsRoverOrientacion subclass: #MarsRoverOrientacionEste
 	instanceVariableNames: ''
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'TPMarsRover'!
 
-!Este methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:35:05'!
+!MarsRoverOrientacionEste methodsFor: 'orders' stamp: 'LL 10/30/2022 20:35:05'!
 avanzar
 	^1@0! !
 
-!Este methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:35:11'!
+!MarsRoverOrientacionEste methodsFor: 'orders' stamp: 'LL 10/30/2022 20:35:11'!
 retroceder
 	^-1@0! !
 
-!Este methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:28:52'!
+!MarsRoverOrientacionEste methodsFor: 'orders' stamp: 'ALR 10/31/2022 17:29:34'!
 rotarDerecha
-	^Sur new.! !
+	^MarsRoverOrientacionSur new.! !
 
-!Este methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:28:45'!
+!MarsRoverOrientacionEste methodsFor: 'orders' stamp: 'ALR 10/31/2022 17:29:08'!
 rotarIzquierda
-	^Norte new.! !
+	^MarsRoverOrientacionNorte new.! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
-!classDefinition: 'Este class' category: 'TPMarsRover'!
-Este class
+!classDefinition: 'MarsRoverOrientacionEste class' category: 'TPMarsRover'!
+MarsRoverOrientacionEste class
 	instanceVariableNames: ''!
 
-!Este class methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:23:46'!
+!MarsRoverOrientacionEste class methodsFor: 'accessing' stamp: 'LL 10/30/2022 20:23:46'!
 simbolo
 	^#E! !
 
 
-!classDefinition: #Norte category: 'TPMarsRover'!
-Orientacion subclass: #Norte
+!classDefinition: #MarsRoverOrientacionNorte category: 'TPMarsRover'!
+MarsRoverOrientacion subclass: #MarsRoverOrientacionNorte
 	instanceVariableNames: ''
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'TPMarsRover'!
 
-!Norte methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:35:38'!
+!MarsRoverOrientacionNorte methodsFor: 'orders' stamp: 'LL 10/30/2022 20:35:38'!
 avanzar
 	^0@1! !
 
-!Norte methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:35:33'!
+!MarsRoverOrientacionNorte methodsFor: 'orders' stamp: 'LL 10/30/2022 20:35:33'!
 retroceder
 	^0@-1! !
 
-!Norte methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:27:59'!
+!MarsRoverOrientacionNorte methodsFor: 'orders' stamp: 'ALR 10/31/2022 17:28:51'!
 rotarDerecha
-	^Este new.! !
+	^MarsRoverOrientacionEste new.! !
 
-!Norte methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:27:53'!
+!MarsRoverOrientacionNorte methodsFor: 'orders' stamp: 'ALR 10/31/2022 17:29:23'!
 rotarIzquierda
-	^Oeste new.! !
+	^MarsRoverOrientacionOeste new.! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
-!classDefinition: 'Norte class' category: 'TPMarsRover'!
-Norte class
+!classDefinition: 'MarsRoverOrientacionNorte class' category: 'TPMarsRover'!
+MarsRoverOrientacionNorte class
 	instanceVariableNames: ''!
 
-!Norte class methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:23:58'!
+!MarsRoverOrientacionNorte class methodsFor: 'accessing' stamp: 'LL 10/30/2022 20:23:58'!
 simbolo
 	^#N! !
 
 
-!classDefinition: #Oeste category: 'TPMarsRover'!
-Orientacion subclass: #Oeste
+!classDefinition: #MarsRoverOrientacionOeste category: 'TPMarsRover'!
+MarsRoverOrientacion subclass: #MarsRoverOrientacionOeste
 	instanceVariableNames: ''
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'TPMarsRover'!
 
-!Oeste methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:36:16'!
+!MarsRoverOrientacionOeste methodsFor: 'orders' stamp: 'LL 10/30/2022 20:36:16'!
 avanzar
 	^-1@0! !
 
-!Oeste methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:36:10'!
+!MarsRoverOrientacionOeste methodsFor: 'orders' stamp: 'LL 10/30/2022 20:36:10'!
 retroceder
 	^1@0! !
 
-!Oeste methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:28:27'!
+!MarsRoverOrientacionOeste methodsFor: 'orders' stamp: 'ALR 10/31/2022 17:29:08'!
 rotarDerecha
-	^Norte new.! !
+	^MarsRoverOrientacionNorte new.! !
 
-!Oeste methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:28:30'!
+!MarsRoverOrientacionOeste methodsFor: 'orders' stamp: 'ALR 10/31/2022 17:29:34'!
 rotarIzquierda
-	^Sur new.! !
+	^MarsRoverOrientacionSur new.! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
-!classDefinition: 'Oeste class' category: 'TPMarsRover'!
-Oeste class
+!classDefinition: 'MarsRoverOrientacionOeste class' category: 'TPMarsRover'!
+MarsRoverOrientacionOeste class
 	instanceVariableNames: ''!
 
-!Oeste class methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:24:16'!
+!MarsRoverOrientacionOeste class methodsFor: 'accessing' stamp: 'LL 10/30/2022 20:24:16'!
 simbolo
 	^#O! !
 
 
-!classDefinition: #Sur category: 'TPMarsRover'!
-Orientacion subclass: #Sur
+!classDefinition: #MarsRoverOrientacionSur category: 'TPMarsRover'!
+MarsRoverOrientacion subclass: #MarsRoverOrientacionSur
 	instanceVariableNames: ''
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'TPMarsRover'!
 
-!Sur methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:35:59'!
+!MarsRoverOrientacionSur methodsFor: 'orders' stamp: 'LL 10/30/2022 20:35:59'!
 avanzar
 	^0@-1! !
 
-!Sur methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:35:52'!
+!MarsRoverOrientacionSur methodsFor: 'orders' stamp: 'LL 10/30/2022 20:35:52'!
 retroceder
 	^0@1! !
 
-!Sur methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:28:12'!
+!MarsRoverOrientacionSur methodsFor: 'orders' stamp: 'ALR 10/31/2022 17:29:23'!
 rotarDerecha
-	^Oeste new.! !
+	^MarsRoverOrientacionOeste new.! !
 
-!Sur methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:28:16'!
+!MarsRoverOrientacionSur methodsFor: 'orders' stamp: 'ALR 10/31/2022 17:28:51'!
 rotarIzquierda
-	^Este new.! !
+	^MarsRoverOrientacionEste new.! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
-!classDefinition: 'Sur class' category: 'TPMarsRover'!
-Sur class
+!classDefinition: 'MarsRoverOrientacionSur class' category: 'TPMarsRover'!
+MarsRoverOrientacionSur class
 	instanceVariableNames: ''!
 
-!Sur class methodsFor: 'as yet unclassified' stamp: 'LL 10/30/2022 20:24:23'!
+!MarsRoverOrientacionSur class methodsFor: 'accessing' stamp: 'LL 10/30/2022 20:24:23'!
 simbolo
 	^#S! !
