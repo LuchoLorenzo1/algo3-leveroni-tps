@@ -5,12 +5,12 @@ TestCase subclass: #PortfolioTest
 	poolDictionaries: ''
 	category: 'ServiciosFinancieros-Ejercicio'!
 
-!PortfolioTest methodsFor: 'tests' stamp: 'alr 11/8/2022 20:46:54'!
-test01PortfolioWithOneAccountHasTheAccountBalance	
+!PortfolioTest methodsFor: 'tests' stamp: 'alr 11/11/2022 15:11:11'!
+test01portfolioWithOneAccountHasTheAccountBalance	
 	self assert: (portfolio balance) equals: (account balance)! !
 
-!PortfolioTest methodsFor: 'tests' stamp: 'alr 11/10/2022 21:50:47'!
-test02PortFolioWithTwoAccountsHasTheTwoAccountsBalance
+!PortfolioTest methodsFor: 'tests' stamp: 'alr 11/11/2022 15:11:17'!
+test02portFolioWithTwoAccountsHasTheTwoAccountsBalance
 	|account2|
 	
 	account2 := ReceptiveAccount new.
@@ -20,8 +20,8 @@ test02PortFolioWithTwoAccountsHasTheTwoAccountsBalance
 
 	self assert:(portfolio balance) equals: (300 * peso)! !
 
-!PortfolioTest methodsFor: 'tests' stamp: 'alr 11/10/2022 21:46:05'!
-test03xxx
+!PortfolioTest methodsFor: 'tests' stamp: 'alr 11/11/2022 15:11:23'!
+test03balanceBetweenAccountWithPositiveAndNegativeBalancesAddsToPortfolioBalance
 	|account2|
 	
 	account2 := ReceptiveAccount new.
@@ -31,8 +31,8 @@ test03xxx
 	
 	self assert:(portfolio balance) equals: (50 * peso)! !
 
-!PortfolioTest methodsFor: 'tests' stamp: 'alr 11/10/2022 21:46:05'!
-test04xxx
+!PortfolioTest methodsFor: 'tests' stamp: 'alr 11/11/2022 15:11:29'!
+test04portfolioHasRegisteredTransactionOnOneOfItsAccounts
 	|account2 transaccion|
 	
 	account2 := ReceptiveAccount new.
@@ -42,8 +42,8 @@ test04xxx
 	
 	self assert:(portfolio hasRegistered: transaccion)! !
 
-!PortfolioTest methodsFor: 'tests' stamp: 'alr 11/10/2022 21:46:05'!
-test05xxx
+!PortfolioTest methodsFor: 'tests' stamp: 'alr 11/11/2022 15:12:16'!
+test05portfolioHasTransactionWhenAccountIsInSubPortfolio
 	| otroPortfolio account2 account3 account4 transaccion |
 	
 	account2 := ReceptiveAccount new.
@@ -60,8 +60,8 @@ test05xxx
 	
 	self assert: (portfolio hasRegistered: transaccion).! !
 
-!PortfolioTest methodsFor: 'tests' stamp: 'alr 11/10/2022 21:49:45'!
-test06xxx
+!PortfolioTest methodsFor: 'tests' stamp: 'alr 11/11/2022 15:32:27'!
+test06portfolioKnowsTransactionsOfAccountInSubPortfolio
 	| otroPortfolio account2 account3 account4 listaDeTransacciones|
 	
 	account2 := ReceptiveAccount new.
@@ -78,7 +78,9 @@ test06xxx
 	listaDeTransacciones add: (Deposit register: 100 * peso on: account3).
 	listaDeTransacciones add: (Withdraw register: 50 * peso on: account3).
 	
-	self assert: (portfolio transactionsOf: account3) isEmpty.! !
+	self assert: (portfolio transactionsOf: account3) isEmpty.
+	self assert: (portfolio transactionsOf: otroPortfolio) isEmpty not.
+	self assert: (otroPortfolio transactionsOf: account3) equals: listaDeTransacciones.! !
 
 
 !PortfolioTest methodsFor: 'setUp/tearDown' stamp: 'alr 11/8/2022 20:46:42'!
@@ -179,70 +181,71 @@ test07AccountKnowsItsTransactions
 ! !
 
 
-!classDefinition: #TransferenciaTest category: 'ServiciosFinancieros-Ejercicio'!
-TestCase subclass: #TransferenciaTest
+!classDefinition: #TransferTest category: 'ServiciosFinancieros-Ejercicio'!
+TestCase subclass: #TransferTest
 	instanceVariableNames: 'cuenta1 cuenta2'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'ServiciosFinancieros-Ejercicio'!
 
-!TransferenciaTest methodsFor: 'as yet unclassified' stamp: 'alr 11/10/2022 20:47:38'!
-setUp
-	cuenta1 := ReceptiveAccount new.
-	cuenta2 := ReceptiveAccount new.! !
-
-!TransferenciaTest methodsFor: 'as yet unclassified' stamp: 'alr 11/10/2022 21:39:35'!
+!TransferTest methodsFor: 'tests' stamp: 'alr 11/11/2022 11:48:05'!
 test01transferingPutsMoneyInReceivingAccountAndExtractsFromTransferingAccount	
 	Deposit register: (100 * peso) on: cuenta1.
 	
-	Transferencia transfer: (100 * peso) from: cuenta1 to: cuenta2.
+	Transfer transfer: (100 * peso) from: cuenta1 to: cuenta2.
 	
 	self assert: (cuenta2 balance) equals: (100 * peso).
 	self assert: (cuenta1 balance) equals: (0 * peso).! !
 
-!TransferenciaTest methodsFor: 'as yet unclassified' stamp: 'alr 11/10/2022 21:40:13'!
+!TransferTest methodsFor: 'tests' stamp: 'alr 11/11/2022 11:48:05'!
 test02cantTransferWhenAccountHasLessMoneyThanIndicated
 	self
-		should: [ Transferencia transfer: (100 * peso) from: cuenta1 to: cuenta2. ]
+		should: [ Transfer transfer: (100 * peso) from: cuenta1 to: cuenta2. ]
 		raise: Error 
 		withExceptionDo: [ :anError |
-			self assert: (Transferencia transferingAmountIsGreaterThanAccountBalanceErrorDescription) equals: (anError messageText) ].
+			self assert: (Transfer transferingAmountIsGreaterThanAccountBalanceErrorDescription) equals: (anError messageText) ].
 	
 	self assert: (cuenta2 balance) equals: (0 * peso).
 	self assert: (cuenta1 balance) equals: (0 * peso).
 	! !
 
-!TransferenciaTest methodsFor: 'as yet unclassified' stamp: 'alr 11/10/2022 21:27:04'!
-test03
+!TransferTest methodsFor: 'tests' stamp: 'alr 11/11/2022 12:17:33'!
+test03accountsCanMakeMultipleTransfersFromOneToAnother
 	Deposit register: (100 * peso) on: cuenta1.
 	
-	Transferencia transfer: (100 * peso) from: cuenta1 to: cuenta2.
-	Transferencia transfer: (20 * peso) from: cuenta2 to: cuenta1.
+	Transfer transfer: (100 * peso) from: cuenta1 to: cuenta2.
+	Transfer transfer: (20 * peso) from: cuenta2 to: cuenta1.
 	
 	self assert: (cuenta2 balance) equals: (80 * peso).
 	self assert: (cuenta1 balance) equals: (20 * peso).! !
 
-!TransferenciaTest methodsFor: 'as yet unclassified' stamp: 'alr 11/10/2022 21:37:26'!
-test04
+!TransferTest methodsFor: 'tests' stamp: 'alr 11/11/2022 15:00:59'!
+test04eachMovementOfTheTransferKnowsItsCounterpart
 	| registroTransferencia |
 	Deposit register: (100 * peso) on: cuenta1.
 	
-	registroTransferencia := Transferencia transfer: (100 * peso) from: cuenta1 to: cuenta2.
+	registroTransferencia := Transfer transfer: (100 * peso) from: cuenta1 to: cuenta2.
 	
-	self assert: (registroTransferencia contraPataExtraccion) equals: (cuenta2 transactions last).
-	self assert: (registroTransferencia contraPataDeposito) equals: (cuenta1 transactions last).! !
+	self assert: (registroTransferencia withdraw counterpart) equals: (cuenta2 transactions last).
+	self assert: (registroTransferencia deposit counterpart) equals: (cuenta1 transactions last).! !
 
-!TransferenciaTest methodsFor: 'as yet unclassified' stamp: 'alr 11/10/2022 21:38:00'!
-test05
+!TransferTest methodsFor: 'tests' stamp: 'alr 11/11/2022 12:18:24'!
+test05transferValueCantBeNegative
 	self
-		should: [ Transferencia transfer: (-100 * peso) from: cuenta1 to: cuenta2. ]
+		should: [ Transfer transfer: (-100 * peso) from: cuenta1 to: cuenta2. ]
 		raise: Error 
 		withExceptionDo: [ :anError |
-			self assert: (Transferencia negativeValueErrorDescription) equals: (anError messageText) ].
+			self assert: (Transfer negativeValueErrorDescription) equals: (anError messageText) ].
 	
 	self assert: (cuenta2 balance) equals: (0 * peso).
 	self assert: (cuenta1 balance) equals: (0 * peso).
 	! !
+
+
+!TransferTest methodsFor: 'setUp/tearDown' stamp: 'alr 11/10/2022 20:47:38'!
+setUp
+	cuenta1 := ReceptiveAccount new.
+	cuenta2 := ReceptiveAccount new.! !
 
 
 !classDefinition: #AccountTransaction category: 'ServiciosFinancieros-Ejercicio'!
@@ -302,7 +305,7 @@ for: aValue
 	^ self new initializeFor: aValue ! !
 
 
-!Deposit class methodsFor: 'as yet unclassified' stamp: 'alr 11/8/2022 19:53:18'!
+!Deposit class methodsFor: 'addition to accounts' stamp: 'alr 11/8/2022 19:53:18'!
 register: aValue on: anAccount
 	| transaction |
 	
@@ -345,7 +348,7 @@ for: aValue
 	^ self new initializeFor: aValue ! !
 
 
-!Withdraw class methodsFor: 'as yet unclassified' stamp: 'alr 11/8/2022 20:07:05'!
+!Withdraw class methodsFor: 'addition to accounts' stamp: 'alr 11/8/2022 20:07:05'!
 register: aValue on: anAccount
 	| transaction |
 	
@@ -362,29 +365,31 @@ Object subclass: #Portfolio
 	poolDictionaries: ''
 	category: 'ServiciosFinancieros-Ejercicio'!
 
-!Portfolio methodsFor: 'as yet unclassified' stamp: 'alr 11/10/2022 21:46:05'!
-add: anAccountOrPortfolio
-	accounts add: anAccountOrPortfolio.! !
-
-!Portfolio methodsFor: 'as yet unclassified' stamp: 'alr 11/10/2022 21:40:52'!
+!Portfolio methodsFor: 'accessing' stamp: 'alr 11/11/2022 14:48:16'!
 balance
-	^accounts sum: [ :anAccountOrPortfolio | anAccountOrPortfolio balance ] ifEmpty: [ 0 ]! !
+	^accounts sum: [ :anAccountOrPortfolio | anAccountOrPortfolio balance ] ifEmpty: [ 0 * peso ]! !
 
-!Portfolio methodsFor: 'as yet unclassified' stamp: 'alr 11/10/2022 21:44:38'!
-hasRegistered: aTransaction
-	^ accounts anySatisfy: [ :anAccountOrPortfolio | anAccountOrPortfolio hasRegistered: aTransaction ].
-! !
 
-!Portfolio methodsFor: 'as yet unclassified' stamp: 'alr 11/8/2022 20:35:44'!
+!Portfolio methodsFor: 'initialization' stamp: 'alr 11/8/2022 20:35:44'!
 initializeWith: anAccount
 	accounts := OrderedCollection new.
 	accounts add: anAccount.! !
 
-!Portfolio methodsFor: 'as yet unclassified' stamp: 'alr 11/8/2022 21:31:34'!
+
+!Portfolio methodsFor: 'operations' stamp: 'alr 11/10/2022 21:46:05'!
+add: anAccountOrPortfolio
+	accounts add: anAccountOrPortfolio.! !
+
+!Portfolio methodsFor: 'operations' stamp: 'alr 11/10/2022 21:44:38'!
+hasRegistered: aTransaction
+	^ accounts anySatisfy: [ :anAccountOrPortfolio | anAccountOrPortfolio hasRegistered: aTransaction ].
+! !
+
+!Portfolio methodsFor: 'operations' stamp: 'alr 11/8/2022 21:31:34'!
 transactions
 	^accounts! !
 
-!Portfolio methodsFor: 'as yet unclassified' stamp: 'alr 11/10/2022 21:43:31'!
+!Portfolio methodsFor: 'operations' stamp: 'alr 11/11/2022 15:29:45'!
 transactionsOf: anAccountOrPortfolio
 	(accounts includes: anAccountOrPortfolio) ifFalse: [^OrderedCollection new].
 	
@@ -396,7 +401,7 @@ transactionsOf: anAccountOrPortfolio
 Portfolio class
 	instanceVariableNames: ''!
 
-!Portfolio class methodsFor: 'as yet unclassified' stamp: 'alr 11/8/2022 20:35:06'!
+!Portfolio class methodsFor: 'instance creation' stamp: 'alr 11/8/2022 20:35:06'!
 newWithAccount: anAccount
 	^self new initializeWith: anAccount.! !
 
@@ -436,39 +441,39 @@ transactions
 
 	^ transactions copy! !
 
-
 
-!classDefinition: #Transferencia category: 'ServiciosFinancieros-Ejercicio'!
-Object subclass: #Transferencia
+!classDefinition: #Transfer category: 'ServiciosFinancieros-Ejercicio'!
+Object subclass: #Transfer
 	instanceVariableNames: 'pataDeposito pataExtraccion'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'ServiciosFinancieros-Ejercicio'!
 
-!Transferencia methodsFor: 'as yet unclassified' stamp: 'alr 11/10/2022 21:33:15'!
-contraPataDeposito
-	^pataExtraccion! !
+!Transfer methodsFor: 'accessing' stamp: 'alr 11/11/2022 11:50:00'!
+counterpart
+	self subclassResponsibility! !
 
-!Transferencia methodsFor: 'as yet unclassified' stamp: 'alr 11/10/2022 21:33:08'!
-contraPataExtraccion
+!Transfer methodsFor: 'accessing' stamp: 'alr 11/11/2022 12:05:46'!
+deposit
 	^pataDeposito! !
 
-!Transferencia methodsFor: 'as yet unclassified' stamp: 'alr 11/10/2022 21:32:19'!
+!Transfer methodsFor: 'accessing' stamp: 'alr 11/11/2022 12:05:42'!
+withdraw
+	^pataExtraccion! !
+
+
+!Transfer methodsFor: 'initialization' stamp: 'alr 11/11/2022 14:55:52'!
 initializeWith: deposito and: extraccion
-	pataDeposito := deposito.
-	pataExtraccion := extraccion.! !
+	pataDeposito := TransferDeposit withMovement: deposito correspondingToTransfer: self.
+	pataExtraccion := TransferWithdraw withMovement: extraccion correspondingToTransfer: self! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
-!classDefinition: 'Transferencia class' category: 'ServiciosFinancieros-Ejercicio'!
-Transferencia class
+!classDefinition: 'Transfer class' category: 'ServiciosFinancieros-Ejercicio'!
+Transfer class
 	instanceVariableNames: ''!
 
-!Transferencia class methodsFor: 'as yet unclassified' stamp: 'alr 11/10/2022 21:11:38'!
-negativeValueErrorDescription
-	^'No se puede transferir dinero negativo!!'! !
-
-!Transferencia class methodsFor: 'as yet unclassified' stamp: 'alr 11/10/2022 21:29:04'!
+!Transfer class methodsFor: 'instance creation' stamp: 'alr 11/10/2022 21:29:04'!
 transfer: aMoneyValue from: transferingAccount to: receivingAccount
 	| deposito extraccion |
 	(aMoneyValue < 0) ifTrue: [self error: self negativeValueErrorDescription].
@@ -477,6 +482,76 @@ transfer: aMoneyValue from: transferingAccount to: receivingAccount
 	deposito := Deposit register: aMoneyValue on: receivingAccount.
 	^self new initializeWith: deposito and: extraccion.! !
 
-!Transferencia class methodsFor: 'as yet unclassified' stamp: 'alr 11/10/2022 21:18:19'!
+
+!Transfer class methodsFor: 'errors' stamp: 'alr 11/10/2022 21:11:38'!
+negativeValueErrorDescription
+	^'No se puede transferir dinero negativo!!'! !
+
+!Transfer class methodsFor: 'errors' stamp: 'alr 11/10/2022 21:18:19'!
 transferingAmountIsGreaterThanAccountBalanceErrorDescription
 	^'La cuenta transferente no tiene los fondos suficientes para realizar esta operación'! !
+
+
+!classDefinition: #TransferDeposit category: 'ServiciosFinancieros-Ejercicio'!
+Transfer subclass: #TransferDeposit
+	instanceVariableNames: 'deposito transfer'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'ServiciosFinancieros-Ejercicio'!
+
+!TransferDeposit methodsFor: 'accessing' stamp: 'alr 11/11/2022 14:59:13'!
+counterpart
+	^transfer withdraw movement! !
+
+!TransferDeposit methodsFor: 'accessing' stamp: 'alr 11/11/2022 12:02:47'!
+movement
+	^deposito! !
+
+
+!TransferDeposit methodsFor: 'initialization' stamp: 'alr 11/11/2022 14:59:02'!
+initializeWith: aDeposit correspondingToTransfer: aTransfer 
+	deposito := aDeposit.
+	transfer := aTransfer! !
+
+"-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
+
+!classDefinition: 'TransferDeposit class' category: 'ServiciosFinancieros-Ejercicio'!
+TransferDeposit class
+	instanceVariableNames: ''!
+
+!TransferDeposit class methodsFor: 'instance creation' stamp: 'alr 11/11/2022 15:00:27'!
+withMovement: aDeposit correspondingToTransfer: aTransfer
+	^self new initializeWith: aDeposit correspondingToTransfer: aTransfer
+	! !
+
+
+!classDefinition: #TransferWithdraw category: 'ServiciosFinancieros-Ejercicio'!
+Transfer subclass: #TransferWithdraw
+	instanceVariableNames: 'extraccion transfer'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'ServiciosFinancieros-Ejercicio'!
+
+!TransferWithdraw methodsFor: 'initialization' stamp: 'alr 11/11/2022 15:01:23'!
+initializeWith: aWithdraw correspondingToTransfer: aTransfer 
+	extraccion := aWithdraw.
+	transfer := aTransfer.! !
+
+
+!TransferWithdraw methodsFor: 'accessing' stamp: 'alr 11/11/2022 14:59:25'!
+counterpart
+	^transfer deposit movement! !
+
+!TransferWithdraw methodsFor: 'accessing' stamp: 'alr 11/11/2022 12:03:21'!
+movement
+	^extraccion! !
+
+"-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
+
+!classDefinition: 'TransferWithdraw class' category: 'ServiciosFinancieros-Ejercicio'!
+TransferWithdraw class
+	instanceVariableNames: ''!
+
+!TransferWithdraw class methodsFor: 'instance creation' stamp: 'alr 11/11/2022 15:00:33'!
+withMovement: aWithdraw correspondingToTransfer: aTransfer
+	^(self new) initializeWith: aWithdraw correspondingToTransfer: aTransfer! !
