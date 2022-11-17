@@ -201,63 +201,40 @@ test07AccountKnowsItsTransactions
 
 !classDefinition: #ReportTest category: 'ServiciosFinancieros-Solucion'!
 TestCase subclass: #ReportTest
-	instanceVariableNames: ''
+	instanceVariableNames: 'account'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'ServiciosFinancieros-Solucion'!
 
-!ReportTest methodsFor: 'as yet unclassified' stamp: 'LL 11/16/2022 19:18:02'!
-test01AccountWithNoActivityHasNoTransactions
-	| account summary |
-	
-	account := ReceptiveAccount new.
-	summary := AccountSummaryVisitor new.
-	
-	self assert: (account accept: summary) equals: 'Balance = 0 pesos'! !
+!ReportTest methodsFor: 'tests' stamp: 'alr 11/17/2022 20:40:13'!
+test01accountSummaryOfEmptyAccountHasNoTransactions
+	self assert: (AccountSummaryVisitor on: account) equals: 'Balance = 0 pesos'! !
 
-!ReportTest methodsFor: 'as yet unclassified' stamp: 'LL 11/16/2022 19:19:34'!
-test02
-	| account summary |
-	
-	account := ReceptiveAccount new.
-	summary := AccountSummaryVisitor new.
-	
+!ReportTest methodsFor: 'tests' stamp: 'alr 11/17/2022 20:40:50'!
+test02accountSummaryOfOneDeposit
 	Deposit register: (100 * peso) on: account.
-	
-	self assert: (account accept: summary) equals: 'Balance = 0 pesos'! !
+	self assert: (AccountSummaryVisitor on: account) equals: 'Balance = 100 pesos'! !
 
-!ReportTest methodsFor: 'as yet unclassified' stamp: 'LL 11/16/2022 22:21:09'!
-test03
-	| account summary |
-
-	account := ReceptiveAccount new.
-	summary := AccountSummaryVisitor new.
-
+!ReportTest methodsFor: 'tests' stamp: 'alr 11/17/2022 20:41:04'!
+test03accountSummaryOfOneWithdraw
 	Withdraw register: (100 * peso) on: account.
-
-	self assert: (account accept: summary) equals: 'Balance = -100 pesos'
+	self assert: (AccountSummaryVisitor on: account) equals: 'Balance = -100 pesos'
 ! !
 
-!ReportTest methodsFor: 'as yet unclassified' stamp: 'LL 11/16/2022 22:21:31'!
-test04
-	| account summary |
-
-	account := ReceptiveAccount new.
-	summary := AccountSummaryVisitor new.
-
+!ReportTest methodsFor: 'tests' stamp: 'alr 11/17/2022 20:42:12'!
+test04accountSummaryOfWithdrawAndDeposit
 	Withdraw register: (100 * peso) on: account.
 	Deposit register: (-100 * peso) on: account.
 
-	self assert: (account accept: summary) equals: 'Balance = -100 pesos'
+	self assert: (AccountSummaryVisitor on: account) equals: 'Balance = -100 pesos'
 ! !
 
-!ReportTest methodsFor: 'as yet unclassified' stamp: 'LL 11/16/2022 22:21:53'!
+!ReportTest methodsFor: 'tests' stamp: 'alr 11/17/2022 20:51:24'!
 test05
 
-	| destinationAccount originAccount summary |
+	| destinationAccount originAccount |
 
 	originAccount := ReceptiveAccount new.
-	summary := AccountSummaryVisitor new.
 	Deposit register: 10 * peso on: originAccount.
 
 	destinationAccount := ReceptiveAccount new.
@@ -265,61 +242,39 @@ test05
 
 	Transfer amount: 2 * peso from: originAccount to: destinationAccount.
 
-	self assert: (originAccount accept: summary) equals: 'Balance = 8 pesos'.
+	self assert: (AccountSummaryVisitor on: originAccount) equals: 'Balance = 8 pesos'.
 ! !
 
-!ReportTest methodsFor: 'as yet unclassified' stamp: 'LL 11/16/2022 22:22:22'!
-test06
-	| account summary |
-
-	account := ReceptiveAccount new.
-	summary := NetTransferVisitor new.
-
-	self assert: (account accept: summary) equals: 0.
+!ReportTest methodsFor: 'tests' stamp: 'alr 11/17/2022 20:42:52'!
+test06netTransferOnEmptyAccountIsZero
+	self assert: (NetTransferVisitor on: account) equals: 0.
 
 ! !
 
-!ReportTest methodsFor: 'as yet unclassified' stamp: 'LL 11/16/2022 22:24:31'!
-test07
-	| account report |
-
-	account := ReceptiveAccount new.
-	report := NetTransferVisitor new.
-
+!ReportTest methodsFor: 'tests' stamp: 'alr 11/17/2022 20:44:00'!
+test07netTransferOnAccountWithADepositAndNoTransfersIsZero
 	Deposit register: (100 * peso) on: account.
-
-	self assert: (account accept: report) equals: 0 * peso.
+	self assert: (NetTransferVisitor on: account) equals: 0 * peso.
 ! !
 
-!ReportTest methodsFor: 'as yet unclassified' stamp: 'LL 11/16/2022 22:24:35'!
-test08
-	| account report |
-
-	account := ReceptiveAccount new.
-	report := NetTransferVisitor new.
-
+!ReportTest methodsFor: 'tests' stamp: 'alr 11/17/2022 20:44:21'!
+test08netTransferOnAccountWithAWithdrawAndNoTransfersIsZero
 	Withdraw register: (100 * peso) on: account.
-
-	self assert: (account accept: report) equals: 0 * peso.
+	self assert: (NetTransferVisitor on: account) equals: 0 * peso.
 ! !
 
-!ReportTest methodsFor: 'as yet unclassified' stamp: 'LL 11/16/2022 22:24:41'!
-test09
-	| account report |
-
-	account := ReceptiveAccount new.
-	report := NetTransferVisitor new.
-
+!ReportTest methodsFor: 'tests' stamp: 'alr 11/17/2022 20:45:01'!
+test09netTransferOnAccountWithCounterTransactionsIsZero
 	Withdraw register: (100 * peso) on: account.
 	Deposit register: (-100 * peso) on: account.
 
-	self assert: (account accept: report) equals: 0 * peso.
+	self assert: (NetTransferVisitor on: account) equals: 0 * peso.
 ! !
 
-!ReportTest methodsFor: 'as yet unclassified' stamp: 'LL 11/16/2022 22:25:02'!
+!ReportTest methodsFor: 'tests' stamp: 'alr 11/17/2022 20:52:05'!
 test10
 
-	| destinationAccount originAccount transfer report |
+	| destinationAccount originAccount transfer |
 	
 	originAccount := ReceptiveAccount new.
 	Deposit register: 10 * peso on: originAccount.
@@ -327,17 +282,16 @@ test10
 	destinationAccount := ReceptiveAccount new.
 	Deposit register: 10 * peso on: destinationAccount.
 
-	Transfer amount: 2 * peso from: originAccount to: destinationAccount.
+	transfer := Transfer amount: 2 * peso from: originAccount to: destinationAccount.
 
-	report := NetTransferVisitor new.
-	self assert: (destinationAccount accept: report) equals: 2 * peso.
+	self assert: (NetTransferVisitor on: destinationAccount) equals: 2 * peso.
 
 ! !
 
-!ReportTest methodsFor: 'as yet unclassified' stamp: 'LL 11/16/2022 22:25:45'!
+!ReportTest methodsFor: 'tests' stamp: 'alr 11/17/2022 20:52:35'!
 test11
 
-	| destinationAccount portfolioDestinationAccount report originAccount|
+	| destinationAccount portfolioDestinationAccount originAccount|
 
 	originAccount := ReceptiveAccount new.
 	Deposit register: 10 * peso on: originAccount.
@@ -347,8 +301,12 @@ test11
 	Transfer amount: 2 * peso from: originAccount to: destinationAccount.
 	portfolioDestinationAccount := Portfolio with: destinationAccount.
 
-	report := NetTransferVisitor new.
-	self assert: (portfolioDestinationAccount accept: report) equals: 2 * peso.! !
+	self assert: (NetTransferVisitor on: portfolioDestinationAccount) equals: 2 * peso.! !
+
+
+!ReportTest methodsFor: 'setUp/tearDown' stamp: 'alr 11/17/2022 20:26:40'!
+setUp
+	account := ReceptiveAccount new.! !
 
 
 !classDefinition: #TransferTest category: 'ServiciosFinancieros-Solucion'!
@@ -946,6 +904,16 @@ visitTransferWithdrawLeg: aTransferWithdrawLeg
 visitWithdraw: aWithdraw
 	self subclassResponsibility ! !
 
+"-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
+
+!classDefinition: 'Visitor class' category: 'ServiciosFinancieros-Solucion'!
+Visitor class
+	instanceVariableNames: ''!
+
+!Visitor class methodsFor: 'instance creation' stamp: 'alr 11/17/2022 20:14:34'!
+on: anAccount
+	self subclassResponsibility! !
+
 
 !classDefinition: #AccountSummaryVisitor category: 'ServiciosFinancieros-Solucion'!
 Visitor subclass: #AccountSummaryVisitor
@@ -987,6 +955,16 @@ visitTransferWithdrawLeg: aTransferWithdrawLeg
 visitWithdraw: aWithdraw
 	^'Extracción por ', (aWithdraw value asString)
 ! !
+
+"-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
+
+!classDefinition: 'AccountSummaryVisitor class' category: 'ServiciosFinancieros-Solucion'!
+AccountSummaryVisitor class
+	instanceVariableNames: ''!
+
+!AccountSummaryVisitor class methodsFor: 'instance creation' stamp: 'alr 11/17/2022 20:11:05'!
+on: anAccount
+	^anAccount accept: (self new) ! !
 
 
 !classDefinition: #NetTransferVisitor category: 'ServiciosFinancieros-Solucion'!
@@ -1030,3 +1008,13 @@ visitTransferWithdrawLeg: aTransferWithdrawLeg
 visitWithdraw: aWithdraw
 	^0 * peso.
 ! !
+
+"-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
+
+!classDefinition: 'NetTransferVisitor class' category: 'ServiciosFinancieros-Solucion'!
+NetTransferVisitor class
+	instanceVariableNames: ''!
+
+!NetTransferVisitor class methodsFor: 'instance creation' stamp: 'alr 11/17/2022 20:13:10'!
+on: anAccount
+	^anAccount accept: (self new)! !
