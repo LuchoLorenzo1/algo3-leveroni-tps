@@ -206,23 +206,149 @@ TestCase subclass: #ReportTest
 	poolDictionaries: ''
 	category: 'ServiciosFinancieros-Solucion'!
 
-!ReportTest methodsFor: 'as yet unclassified' stamp: 'Menem 11/15/2022 21:39:47'!
-test01
+!ReportTest methodsFor: 'as yet unclassified' stamp: 'LL 11/16/2022 19:18:02'!
+test01AccountWithNoActivityHasNoTransactions
 	| account summary |
 	
 	account := ReceptiveAccount new.
 	summary := AccountSummaryVisitor new.
 	
-	self assert: (account accept: summary) isEmpty! !
+	self assert: (account accept: summary) equals: 'Balance = 0 pesos'! !
 
-!ReportTest methodsFor: 'as yet unclassified' stamp: 'Menem 11/15/2022 21:28:30'!
+!ReportTest methodsFor: 'as yet unclassified' stamp: 'LL 11/16/2022 19:19:34'!
 test02
-	| account withdrawValue |
+	| account summary |
 	
 	account := ReceptiveAccount new.
-	withdrawValue := 50 * peso.
+	summary := AccountSummaryVisitor new.
 	
-	self assert: withdrawValue equals: (Withdraw register: withdrawValue on: account) value! !
+	Deposit register: (100 * peso) on: account.
+	
+	self assert: (account accept: summary) equals: 'Balance = 0 pesos'! !
+
+!ReportTest methodsFor: 'as yet unclassified' stamp: 'LL 11/16/2022 22:21:09'!
+test03
+	| account summary |
+
+	account := ReceptiveAccount new.
+	summary := AccountSummaryVisitor new.
+
+	Withdraw register: (100 * peso) on: account.
+
+	self assert: (account accept: summary) equals: 'Balance = -100 pesos'
+! !
+
+!ReportTest methodsFor: 'as yet unclassified' stamp: 'LL 11/16/2022 22:21:31'!
+test04
+	| account summary |
+
+	account := ReceptiveAccount new.
+	summary := AccountSummaryVisitor new.
+
+	Withdraw register: (100 * peso) on: account.
+	Deposit register: (-100 * peso) on: account.
+
+	self assert: (account accept: summary) equals: 'Balance = -100 pesos'
+! !
+
+!ReportTest methodsFor: 'as yet unclassified' stamp: 'LL 11/16/2022 22:21:53'!
+test05
+
+	| destinationAccount originAccount summary |
+
+	originAccount := ReceptiveAccount new.
+	summary := AccountSummaryVisitor new.
+	Deposit register: 10 * peso on: originAccount.
+
+	destinationAccount := ReceptiveAccount new.
+	Deposit register: 10 * peso on: destinationAccount.
+
+	Transfer amount: 2 * peso from: originAccount to: destinationAccount.
+
+	self assert: (originAccount accept: summary) equals: 'Balance = 8 pesos'.
+! !
+
+!ReportTest methodsFor: 'as yet unclassified' stamp: 'LL 11/16/2022 22:22:22'!
+test06
+	| account summary |
+
+	account := ReceptiveAccount new.
+	summary := NetTransferVisitor new.
+
+	self assert: (account accept: summary) equals: 0.
+
+! !
+
+!ReportTest methodsFor: 'as yet unclassified' stamp: 'LL 11/16/2022 22:24:31'!
+test07
+	| account report |
+
+	account := ReceptiveAccount new.
+	report := NetTransferVisitor new.
+
+	Deposit register: (100 * peso) on: account.
+
+	self assert: (account accept: report) equals: 0 * peso.
+! !
+
+!ReportTest methodsFor: 'as yet unclassified' stamp: 'LL 11/16/2022 22:24:35'!
+test08
+	| account report |
+
+	account := ReceptiveAccount new.
+	report := NetTransferVisitor new.
+
+	Withdraw register: (100 * peso) on: account.
+
+	self assert: (account accept: report) equals: 0 * peso.
+! !
+
+!ReportTest methodsFor: 'as yet unclassified' stamp: 'LL 11/16/2022 22:24:41'!
+test09
+	| account report |
+
+	account := ReceptiveAccount new.
+	report := NetTransferVisitor new.
+
+	Withdraw register: (100 * peso) on: account.
+	Deposit register: (-100 * peso) on: account.
+
+	self assert: (account accept: report) equals: 0 * peso.
+! !
+
+!ReportTest methodsFor: 'as yet unclassified' stamp: 'LL 11/16/2022 22:25:02'!
+test10
+
+	| destinationAccount originAccount transfer report |
+	
+	originAccount := ReceptiveAccount new.
+	Deposit register: 10 * peso on: originAccount.
+
+	destinationAccount := ReceptiveAccount new.
+	Deposit register: 10 * peso on: destinationAccount.
+
+	Transfer amount: 2 * peso from: originAccount to: destinationAccount.
+
+	report := NetTransferVisitor new.
+	self assert: (destinationAccount accept: report) equals: 2 * peso.
+
+! !
+
+!ReportTest methodsFor: 'as yet unclassified' stamp: 'LL 11/16/2022 22:25:45'!
+test11
+
+	| destinationAccount portfolioDestinationAccount report originAccount|
+
+	originAccount := ReceptiveAccount new.
+	Deposit register: 10 * peso on: originAccount.
+
+	destinationAccount := ReceptiveAccount new.
+	Deposit register: 100 * peso on: destinationAccount.
+	Transfer amount: 2 * peso from: originAccount to: destinationAccount.
+	portfolioDestinationAccount := Portfolio with: destinationAccount.
+
+	report := NetTransferVisitor new.
+	self assert: (portfolioDestinationAccount accept: report) equals: 2 * peso.! !
 
 
 !classDefinition: #TransferTest category: 'ServiciosFinancieros-Solucion'!
@@ -358,8 +484,8 @@ addTransactionsTo: aCollectionOfTransactions
 	self subclassResponsibility ! !
 
 
-!Account methodsFor: 'as yet unclassified' stamp: 'Menem 11/15/2022 21:36:39'!
-accept
+!Account methodsFor: 'as yet unclassified' stamp: 'LL 11/16/2022 22:26:28'!
+accept: aVisitor
 	self subclassResponsibility ! !
 
 
@@ -408,6 +534,11 @@ add: accountToAdd
 addTransactionsTo: aCollectionOfTransactions
 
 	accounts do: [ :anAccount | anAccount addTransactionsTo: aCollectionOfTransactions ]! !
+
+
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'LL 11/16/2022 22:26:41'!
+accept: aVisitor
+	^aVisitor visitPortfolio: self.! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
@@ -499,6 +630,11 @@ affectBalance: aBalance
 
 	self subclassResponsibility ! !
 
+
+!AccountTransaction methodsFor: 'as yet unclassified' stamp: 'LL 11/16/2022 22:26:55'!
+accept: aVisitor
+	self subclassResponsibility.! !
+
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
 !classDefinition: 'AccountTransaction class' category: 'ServiciosFinancieros-Solucion'!
@@ -540,6 +676,11 @@ affectBalance: aBalance
 
 	^aBalance + value ! !
 
+
+!Deposit methodsFor: 'as yet unclassified' stamp: 'LL 11/16/2022 22:28:57'!
+accept: aVisitor
+	^aVisitor visitDeposit: self.! !
+
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
 !classDefinition: 'Deposit class' category: 'ServiciosFinancieros-Solucion'!
@@ -569,6 +710,11 @@ value
 initializeWith: aTransfer
 
 	transfer := aTransfer! !
+
+
+!TransferLeg methodsFor: 'as yet unclassified' stamp: 'LL 11/16/2022 22:27:11'!
+accept: aVisitor
+	self subclassResponsibility.! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
@@ -605,6 +751,11 @@ affectBalance: aBalance
 
 	^aBalance + self value! !
 
+
+!TransferDepositLeg methodsFor: 'as yet unclassified' stamp: 'LL 11/16/2022 22:27:25'!
+accept: aVisitor
+	^aVisitor visitTransferDepositLeg: self.! !
+
 
 !classDefinition: #TransferWithdrawLeg category: 'ServiciosFinancieros-Solucion'!
 TransferLeg subclass: #TransferWithdrawLeg
@@ -623,6 +774,11 @@ depositLeg
 affectBalance: aBalance
 
 	^aBalance - self value! !
+
+
+!TransferWithdrawLeg methodsFor: 'as yet unclassified' stamp: 'LL 11/16/2022 22:28:09'!
+accept: aVisitor
+	^aVisitor visitTransferWithdrawLeg: self.! !
 
 
 !classDefinition: #Withdraw category: 'ServiciosFinancieros-Solucion'!
@@ -648,6 +804,11 @@ value
 affectBalance: aBalance
 
 	^aBalance - value! !
+
+
+!Withdraw methodsFor: 'as yet unclassified' stamp: 'LL 11/16/2022 22:28:35'!
+accept: aVisitor
+	^aVisitor visitWithdraw: self.! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
@@ -761,8 +922,28 @@ Object subclass: #Visitor
 	poolDictionaries: ''
 	category: 'ServiciosFinancieros-Solucion'!
 
+!Visitor methodsFor: 'as yet unclassified' stamp: 'LL 11/16/2022 22:06:48'!
+visitDeposit: aDeposit
+	self subclassResponsibility ! !
+
+!Visitor methodsFor: 'as yet unclassified' stamp: 'LL 11/16/2022 22:07:32'!
+visitPortfolio: aPortfolio
+	self subclassResponsibility ! !
+
 !Visitor methodsFor: 'as yet unclassified' stamp: 'Menem 11/15/2022 21:40:24'!
 visitReceptiveAccount: aReceptiveAccount
+	self subclassResponsibility ! !
+
+!Visitor methodsFor: 'as yet unclassified' stamp: 'LL 11/16/2022 22:07:22'!
+visitTransferDepositLeg: aTransferDepositLeg
+	self subclassResponsibility ! !
+
+!Visitor methodsFor: 'as yet unclassified' stamp: 'LL 11/16/2022 22:07:15'!
+visitTransferWithdrawLeg: aTransferWithdrawLeg
+	self subclassResponsibility ! !
+
+!Visitor methodsFor: 'as yet unclassified' stamp: 'LL 11/16/2022 22:06:56'!
+visitWithdraw: aWithdraw
 	self subclassResponsibility ! !
 
 
@@ -772,3 +953,80 @@ Visitor subclass: #AccountSummaryVisitor
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'ServiciosFinancieros-Solucion'!
+
+!AccountSummaryVisitor methodsFor: 'as yet unclassified' stamp: 'LL 11/16/2022 22:18:31'!
+visitDeposit: aDeposit
+	^'Depósito por ', (aDeposit value asString)
+! !
+
+!AccountSummaryVisitor methodsFor: 'as yet unclassified' stamp: 'LL 11/16/2022 22:08:33'!
+visitPortfolio: aPortfolio
+	| cadena |
+	cadena := String new.
+	aPortfolio transactions do: [:aTransaction | cadena := (cadena, (Character enter asString), (aTransaction accept: self))].
+	^cadena, (Character enter asString), 'Balance = ', aPortfolio balance asString.! !
+
+!AccountSummaryVisitor methodsFor: 'as yet unclassified' stamp: 'LL 11/16/2022 22:09:44'!
+visitReceptiveAccount: anAccount
+	| cadena |
+	cadena := String new.
+	anAccount transactions do: [:aTransaction | cadena := (cadena, (Character enter asString), (aTransaction accept: self))].
+	^cadena, (Character enter asString), 'Balance = ', anAccount balance asString.! !
+
+!AccountSummaryVisitor methodsFor: 'as yet unclassified' stamp: 'LL 11/16/2022 22:18:03'!
+visitTransferDepositLeg: aTransferDepositLeg
+	^'Entrada por transferencia de ', (aTransferDepositLeg value asString)	
+! !
+
+!AccountSummaryVisitor methodsFor: 'as yet unclassified' stamp: 'LL 11/16/2022 22:13:46'!
+visitTransferWithdrawLeg: aTransferWithdrawLeg
+	^'Salida por transferencia de ', (aTransferWithdrawLeg value asString)	
+! !
+
+!AccountSummaryVisitor methodsFor: 'as yet unclassified' stamp: 'LL 11/16/2022 22:18:47'!
+visitWithdraw: aWithdraw
+	^'Extracción por ', (aWithdraw value asString)
+! !
+
+
+!classDefinition: #NetTransferVisitor category: 'ServiciosFinancieros-Solucion'!
+Visitor subclass: #NetTransferVisitor
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'ServiciosFinancieros-Solucion'!
+
+!NetTransferVisitor methodsFor: 'as yet unclassified' stamp: 'LL 11/16/2022 22:10:17'!
+visitDeposit: aDeposit
+	^0 * peso.
+! !
+
+!NetTransferVisitor methodsFor: 'as yet unclassified' stamp: 'LL 11/16/2022 22:11:05'!
+visitPortfolio: aPortfolio
+	| net |
+	net := 0 * peso.
+	aPortfolio transactions	do: [:aTransaction | net := net + (aTransaction accept: self)].
+	^net
+! !
+
+!NetTransferVisitor methodsFor: 'as yet unclassified' stamp: 'LL 11/16/2022 22:30:17'!
+visitReceptiveAccount: anAccount
+	| net |
+	net := 0 * peso.
+	anAccount transactions	do: [:aTransaction | net := net + (aTransaction accept: self)].
+	^net
+! !
+
+!NetTransferVisitor methodsFor: 'as yet unclassified' stamp: 'LL 11/16/2022 22:19:26'!
+visitTransferDepositLeg: aTransferDepositLeg
+	^aTransferDepositLeg value
+! !
+
+!NetTransferVisitor methodsFor: 'as yet unclassified' stamp: 'LL 11/16/2022 22:20:03'!
+visitTransferWithdrawLeg: aTransferWithdrawLeg
+	^(aTransferWithdrawLeg value) * -1! !
+
+!NetTransferVisitor methodsFor: 'as yet unclassified' stamp: 'LL 11/16/2022 22:10:12'!
+visitWithdraw: aWithdraw
+	^0 * peso.
+! !
